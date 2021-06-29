@@ -1,0 +1,34 @@
+/*
+* This is the style file for components
+* 
+* It contains style for :
+*   - MenuBar
+*   - Buttons
+*   - 
+*/
+
+
+/* MenuBar */
+#MenuBar {
+  position: absolute;
+  left: 0;
+  height: 100vh;
+  width: 15vw;
+
+  background-color: var(--greyDark);
+}
+
+#MenuBar ul {
+  list-style-type: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  font-size: 0.8em;
+}
+
+#MenuBar li {
+  margin: 10px;
+}

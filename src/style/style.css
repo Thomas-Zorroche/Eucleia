@@ -1,0 +1,19 @@
+/*
+* This is the main style file for Eucleia Project
+* 
+* It contains:
+*   - Colors
+*   - Fonts
+*   - 
+*/
+
+
+/* Colors */
+:root {
+  --grey: rgb(42, 45, 49);
+  --greyDark: rgb(27, 29, 32);
+  --green: rgb(32, 233, 126);
+}
+
+
+/* Fonts */
