@@ -16,12 +16,10 @@ const getMaxValue = (data) => {
 }
 
 // Bar Chart Object
-const BarChart = (props) => {
-  // Y values
-  const [data, setData] = useState(props.data.map(d => d.y));
-  const [maxValue, setMaxValue] = useState(getMaxValue(data));
-  // X values
-  const [xValues, setXValues] = useState(props.data.map(d => d.x)) 
+const BarChart = ({ dataX, dataY }) => {
+  const [yValues, setData] = useState(dataY);
+  const [maxValueY, setMaxValueY] = useState(getMaxValue(dataY));
+  const [xValues, setXValues] = useState(dataX) 
 
   const innerHeight = height - margin.bottom - margin.top;
   const innerWidth = width - margin.left - margin.right;
@@ -32,7 +30,7 @@ const BarChart = (props) => {
     .paddingInner(innerPadding);
 
   const yScale = scaleLinear()
-    .domain([0, maxValue])
+    .domain([0, maxValueY])
     .range([innerHeight, 0]);
 
   return (
@@ -64,10 +62,10 @@ const BarChart = (props) => {
             </text>
           )}
 
-          {data.map((value, index) => 
+          {yValues.map((value, index) => 
             <Bar 
               value={value}
-              x={xScale(props.data[index].x)}
+              x={xScale(xValues[index])}
               y={yScale(value)}
               height={innerHeight - yScale(value)}
               bandwidth={xScale.bandwidth()}

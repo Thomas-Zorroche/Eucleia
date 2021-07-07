@@ -15,10 +15,20 @@ export const Bar = ({ value, x, y, height, bandwidth, color }) => {
         fill={color} 
       />
 
+      <rect
+        x={x} 
+        y={y - 30}
+        width={bandwidth} 
+        height={30} 
+        fill= { dispalyValue ? "#222222" : "#00000000"}
+      />
+
       <text 
-        x={x + bandwidth * 0.2} 
-        y={y - 10}
-        fill= { dispalyValue ? color : "#00000000"}>
+        x={x + bandwidth * 0.5} 
+        y={y - 7}
+        fill= { dispalyValue ? color : "#00000000"}
+        fontSize="22"
+        style={{ textAnchor: 'middle'}}>
         {value}
       </text>
 

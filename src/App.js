@@ -6,13 +6,22 @@ import MenuBar from './components/ui/MenuBar'
 
 import BarChart from './components/d3/BarChart'
 
-const data = [ 
-  {x: "janvier", y:400}, 
-  {x: "fevrier", y:750}, 
-  {x: "mars", y:222},
-  {x: "avril", y:550},
-  {x: "mai", y:375},
-  {x: "juin", y:451}  
+const dataX = [ 
+  "janvier",
+  "fevrier",
+  "mars",
+  "avril",
+  "mai",
+  "juin" 
+];
+
+const dataY = [ 
+  800, 
+  750, 
+  222,
+  550,
+  119,
+  31  
 ];
 
 function App() {
@@ -22,7 +31,7 @@ function App() {
 
         <MenuBar />
 
-        <BarChart data={data} />
+        <BarChart dataX={dataX} dataY={dataY} />
 
       </header>
     </div>
