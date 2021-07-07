@@ -12,7 +12,10 @@ const dataX = [
   "mars",
   "avril",
   "mai",
-  "juin" 
+  "juin",
+  "juillet",
+  "aout",
+  "septembre"
 ];
 
 const dataY = [ 
@@ -21,7 +24,10 @@ const dataY = [
   222,
   550,
   119,
-  31  
+  31,
+  112,
+  551,
+  496 
 ];
 
 function App() {
@@ -31,7 +37,19 @@ function App() {
 
         <MenuBar />
 
-        <BarChart dataX={dataX} dataY={dataY} />
+        <BarChart
+          width={1200}
+          height={500} 
+          dataX={dataX} 
+          dataY={dataY} 
+        />
+
+        <BarChart
+          width={750}
+          height={300} 
+          dataX={dataX} 
+          dataY={dataY} 
+        />  
 
       </header>
     </div>

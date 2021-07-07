@@ -3,11 +3,10 @@ import { scaleBand, scaleLinear } from 'd3';
 
 import { Bar } from './Bar';
 
-const width = 700;
-const height = 450;
-const margin = { top:50, right:50, bottom:50, left:70 };
-
-const innerPadding = 0.25; // padding between bars
+/* CONSTANTS PARAMETERS */
+const margin = { top:50, right:40, bottom:50, left:70 };
+const innerPadding = 0.5; // padding between bars
+/* ---------------------------------------------------------- */
 
 // Round maxValue up to the nearest 10
 const getMaxValue = (data) => {
@@ -16,7 +15,7 @@ const getMaxValue = (data) => {
 }
 
 // Bar Chart Object
-const BarChart = ({ dataX, dataY }) => {
+const BarChart = ({ width, height, dataX, dataY }) => {
   const [yValues, setData] = useState(dataY);
   const [maxValueY, setMaxValueY] = useState(getMaxValue(dataY));
   const [xValues, setXValues] = useState(dataX) 
