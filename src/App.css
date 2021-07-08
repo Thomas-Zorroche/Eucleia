@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   font-family: 'Ubuntu';
 
   background-color: var(--grey);
@@ -14,6 +13,7 @@
 
 a:link
 {
+  width: 100%;
 	color:white;
 	text-decoration: none;
 }
