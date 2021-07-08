@@ -19,7 +19,9 @@
 }
 
 #MenuBar ul {
+  width: 100%;
   list-style-type: none;
+  padding: 0;
 
   display: flex;
   flex-direction: column;
@@ -30,5 +32,22 @@
 }
 
 #MenuBar li {
-  margin: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 0px 20px 0px;
+  cursor: pointer;
+}
+
+.menuButton {
+  color: rgba(222, 229, 235, 0.863);
+}
+.menuButton:hover {
+  color: rgb(255, 255, 255);
+}
+
+.menuButtonActive {
+  border-left: 3px solid;
+  border-right: 3px solid;
+  border-color: rgb(0, 195, 255);
+  background: linear-gradient(0deg, rgba(57, 181, 206, 0.05) 0%, rgba(57, 181, 206, 0.541) 100%); 
 }

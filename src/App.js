@@ -2,8 +2,8 @@ import './App.css';
 import './style/component.css';
 import './style/style.css';
 
-import MenuBar from './components/ui/MenuBar'
-import BarChart from './components/d3/BarChart'
+import { MenuBar, EMenu } from './components/ui/MenuBar'
+import { BarChart } from './components/d3/BarChart'
 
 import { React, useEffect, useState } from 'react'
 
@@ -50,6 +50,8 @@ function App() {
   const [dataX, setDataX] = useState(dataX1);
   const [dataY, setDataY] = useState(dataY1);
 
+  const [activeMenu, setActiveMenu] = useState(EMenu.ACCEUIL);
+
   useEffect(() => {
     async function loadData()
     {
@@ -66,11 +68,17 @@ function App() {
     loadData();
   }, [])
 
+  const changeMenu = (menu) => {
+    setActiveMenu(menu)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
 
-        <MenuBar />
+        <h1>{activeMenu}</h1>
+
+        <MenuBar onMenuChanged={changeMenu} />
 
         <BarChart
           width={750}

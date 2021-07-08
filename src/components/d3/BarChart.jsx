@@ -15,7 +15,7 @@ const getMaxValue = (data) => {
 } 
 
 // Bar Chart Object
-const BarChart = ({ width, height, dataX, dataY }) => {
+export const BarChart = ({ width, height, dataX, dataY }) => {
   const [yValues, setYValues] = useState(dataY);
   const [maxValueY, setMaxYValue] = useState(getMaxValue(dataY));
   const [xValues, setXValues] = useState(dataX) 
@@ -91,4 +91,3 @@ const BarChart = ({ width, height, dataX, dataY }) => {
 
 }
 
-export default BarChart;
