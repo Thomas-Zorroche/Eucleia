@@ -1,9 +1,7 @@
 .App {
   text-align: center;
   font-family: 'Ubuntu';
-}
 
-.App-header {
   background-color: var(--grey);
   min-height: 100vh;
   display: flex;
@@ -12,4 +10,18 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+a:link
+{
+	color:white;
+	text-decoration: none;
+}
+a:visited
+{
+	color:white;
+	text-decoration: none;
+}
+a:hover {
+	color:white;
 }
