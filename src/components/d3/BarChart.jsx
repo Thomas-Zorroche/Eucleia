@@ -12,12 +12,12 @@ const innerPadding = 0.5; // padding between bars
 const getMaxValue = (data) => {
   const maxValue = Math.max(...data) // max value from data
   return Math.round(((maxValue / 10) + 0) * 10);
-}
+} 
 
 // Bar Chart Object
 const BarChart = ({ width, height, dataX, dataY }) => {
-  const [yValues, setData] = useState(dataY);
-  const [maxValueY, setMaxValueY] = useState(getMaxValue(dataY));
+  const [yValues, setYValues] = useState(dataY);
+  const [maxValueY, setMaxYValue] = useState(getMaxValue(dataY));
   const [xValues, setXValues] = useState(dataX) 
 
   const innerHeight = height - margin.bottom - margin.top;
@@ -32,6 +32,16 @@ const BarChart = ({ width, height, dataX, dataY }) => {
     .domain([0, maxValueY])
     .range([innerHeight, 0]);
 
+  // Update x and y values
+  useEffect(() => {
+    setYValues(dataY)
+    setMaxYValue(getMaxValue(dataY))
+  }, [dataY])
+  
+  useEffect(() => {
+    setXValues(dataX)
+  }, [dataX])
+
   return (
     <div>
       <svg height={height} width={width}>
@@ -39,7 +49,7 @@ const BarChart = ({ width, height, dataX, dataY }) => {
         <g transform={`translate(${margin.left}, ${margin.top})`}>
 
           {yScale.ticks().map((tickValue) => 
-            <g>
+            <g key={tickValue}>
               <text x={-25} y={yScale(tickValue) + 3} fontSize="15" style={{ textAnchor: 'end'}}>{tickValue}</text>
               <line 
                 x1={-10} 
@@ -53,16 +63,18 @@ const BarChart = ({ width, height, dataX, dataY }) => {
 
           {xScale.domain().map((tickValue) =>
             <text 
-            x={xScale(tickValue) + xScale.bandwidth() * 0.5} 
-            y={innerHeight + 30} 
-            fontSize="15" 
-            style={{ textAnchor: 'middle'}}>
+              key={tickValue}
+              x={xScale(tickValue) + xScale.bandwidth() * 0.5} 
+              y={innerHeight + 30} 
+              fontSize="15" 
+              style={{ textAnchor: 'middle'}}>
               {tickValue}
             </text>
           )}
 
           {yValues.map((value, index) => 
             <Bar 
+              key={index}
               value={value}
               x={xScale(xValues[index])}
               y={yScale(value)}

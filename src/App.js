@@ -3,10 +3,11 @@ import './style/component.css';
 import './style/style.css';
 
 import MenuBar from './components/ui/MenuBar'
-
 import BarChart from './components/d3/BarChart'
 
-const dataX = [ 
+import { React, useEffect, useState } from 'react'
+
+const dataX1 = [ 
   "janvier",
   "fevrier",
   "mars",
@@ -18,7 +19,7 @@ const dataX = [
   "septembre"
 ];
 
-const dataY = [ 
+const dataY1 = [ 
   800, 
   750, 
   222,
@@ -30,7 +31,41 @@ const dataY = [
   496 
 ];
 
+async function queryDatabase(query) {
+  const response = await fetch("http://localhost/Eucleia/api/eucleia/?q=" + query, {
+    method: "GET"
+  });
+  const json = await response.json();
+  return json;
+}
+
+const sortByDates = (data) => {
+  return data.sort(function (a,b) {
+    return new Date(a.date) - new Date(b.date);
+  })
+}
+
 function App() {
+
+  const [dataX, setDataX] = useState(dataX1);
+  const [dataY, setDataY] = useState(dataY1);
+
+  useEffect(() => {
+    async function loadData()
+    {
+      const dates = await queryDatabase("dates");
+      const values = await queryDatabase("values");
+
+      const data = dates.map((date, index) => ({date:[date], value:values[index]}));
+
+      console.log(sortByDates(data))
+
+      setDataX(data.map(obj => obj.date));
+      setDataY(data.map(obj => parseInt(obj.value)));
+    }
+    loadData();
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -38,18 +73,11 @@ function App() {
         <MenuBar />
 
         <BarChart
-          width={1200}
-          height={500} 
-          dataX={dataX} 
-          dataY={dataY} 
-        />
-
-        <BarChart
           width={750}
           height={300} 
           dataX={dataX} 
           dataY={dataY} 
-        />  
+        />
 
       </header>
     </div>
