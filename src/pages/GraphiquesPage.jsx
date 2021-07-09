@@ -2,29 +2,6 @@ import { React, useState, useEffect } from 'react';
 
 import { BarChart } from '../components/d3/BarChart';
 
-const dataX1 = [ 
-  "janvier",
-  "fevrier",
-  "mars",
-  "avril",
-  "mai",
-  "juin",
-  "juillet",
-  "aout",
-  "septembre"
-];
-const dataY1 = [ 
-  800, 
-  750, 
-  222,
-  550,
-  119,
-  31,
-  112,
-  551,
-  496 
-];
-
 async function queryDatabase(query) {
   const response = await fetch("http://localhost/Eucleia/api/eucleia/?q=" + query, {
     method: "GET"
@@ -39,8 +16,8 @@ const sortByDates = (data) => {
 }
 
 export const GraphiquePage = () => {
-  const [dataX, setDataX] = useState(dataX1);
-  const [dataY, setDataY] = useState(dataY1);
+  const [dataX, setDataX] = useState([]);
+  const [dataY, setDataY] = useState([]);
 
   useEffect(() => {
     async function loadData()
@@ -50,7 +27,7 @@ export const GraphiquePage = () => {
 
       const data = dates.map((date, index) => ({date:[date], value:values[index]}));
 
-      console.log(sortByDates(data))
+      sortByDates(data);
 
       setDataX(data.map(obj => obj.date));
       setDataY(data.map(obj => parseInt(obj.value)));
@@ -61,7 +38,7 @@ export const GraphiquePage = () => {
   return (
     <div>
         <h1>Graphiques</h1>
-    
+
         <BarChart
           width={750}
           height={300} 

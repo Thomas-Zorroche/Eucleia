@@ -76,7 +76,7 @@ export const BarChart = ({ width, height, dataX, dataY }) => {
             <Bar 
               key={index}
               value={value}
-              x={xScale(xValues[index])}
+              x = {xScale(xValues[index]) || 0}
               y={yScale(value)}
               height={innerHeight - yScale(value)}
               bandwidth={xScale.bandwidth()}

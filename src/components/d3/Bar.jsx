@@ -1,5 +1,4 @@
-import { React, useState, useEffect } from "react";
-import { scaleBand, scaleLinear } from 'd3';
+import { React, useState } from "react";
 
 export const Bar = ({ value, x, y, height, bandwidth, color }) => {
 

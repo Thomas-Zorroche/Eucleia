@@ -6,7 +6,7 @@ export const MenuButton = ({ active, label, onActiveChanged }) => {
 
   useEffect(() => {
     setActive(active);
-  }, [])
+  }, [active])
 
   useEffect(() => {
     setActive(active);

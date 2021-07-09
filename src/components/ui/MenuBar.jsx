@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { React, useEffect, useState } from 'react';
+import { React, useState } from 'react';
 import { MenuButton } from './MenuButton';
 import { Link } from "react-router-dom"
 import '../../style/component.css'
@@ -11,7 +11,7 @@ export const EMenu = {
 }
 
 export const MenuBar = () => {
-  
+
   const [activeButtons, setActivesButton] = useState([true, false, false])
 
   const changeMenu = (label) => {
@@ -34,7 +34,6 @@ export const MenuBar = () => {
 
   return (
     <div id="MenuBar">
-      Eucleia
       <ul>
         <Link to="/">
           <MenuButton active={activeButtons[0]} onActiveChanged={changeMenu} label="Acceuil"/>
