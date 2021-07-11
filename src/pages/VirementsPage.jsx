@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import { React, useState } from 'react';
+import { Link } from "react-router-dom"
+
 
 import { Transfer } from '../components/ui/Transfer';
+import { BaseButton } from '../components/ui/BaseButton';
 
 const transfersTest = [
   {id:0, user:"Thomas", value: 55, date: "2021-07-05", comment:"Courses Carrefour Bay2 Torcy - Anniversaire 17 mois"},
@@ -19,6 +22,9 @@ export const VirementPage = () => {
     <div id="Page">
       <h1>Virements</h1>
 
+      <Link to="/addTransfert">
+        <BaseButton label={"Ajout Virement"} />
+      </Link>
 
       <div className="transfers">
         <div className="transferContainer transferHeader"  style={{backgroundColor: "var(--greyDark)"}}>

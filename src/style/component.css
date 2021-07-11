@@ -23,6 +23,19 @@ h1 {
   margin-left: 50px;
 }
 
+/* BUTTONS */
+.baseButton {
+  background-color: rgb(0, 195, 255);
+  font-size: 22px;
+  color: white;
+  font-family: 'Ubuntu';
+  border: 0px none;
+  padding: 10px;
+  margin: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 /* Header Bar */
 #HeaderBar {
   position: absolute;
@@ -71,7 +84,9 @@ h1 {
 
   background-color: var(--greyDark);
 }
-
+#MenuBar a {
+  width: 100%;
+}
 #MenuBar ul {
   width: 100%;
   list-style-type: none;
@@ -119,6 +134,7 @@ h1 {
   border-color: rgb(131, 131, 131);
   filter: drop-shadow(0 0 0.55rem rgb(26, 26, 26));
   font-size: 20px;
+  margin: 50px;
 }
 /* This is the Transfer Component */
 .transferContainer {
@@ -135,7 +151,7 @@ h1 {
   flex-basis: 0;
   flex-grow: 1;
   text-align: center;
-  margin: 15px 40px 15px 40px;
+  margin: 15px;
 }
 .transferType {
   background-color: blueviolet;
@@ -152,13 +168,43 @@ h1 {
   font-size: 22px;
 }
 
-.addTransferContainer {
-  padding: 0px 20px 0px 20px;
-  margin-top: 25px;
-  border: 2px solid;
-  border-color: aliceblue;
-  border-radius: 15px;
-  background-color: var(--greyDark);
-
+/* FORM ADD TRANSFERT */
+#inputTransferCount {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
+#inputTransferCount input {
+  margin-left: 40px;
+}
+
+#FormAddTransfertContainer {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.formAddTransfer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px;
+  margin-top: 25px;
+  border: 1px solid;
+  border-color: rgb(124, 124, 124);
+  border-radius: 5px;
+  background-color: var(--greyDark);
+  
+  font-size: 20px;
+}
+
+.formAddTransfer div {
+  text-align: center;
+  flex-basis: 0;
+  flex-grow: 1;
+  font-weight: bold;
+}
+
