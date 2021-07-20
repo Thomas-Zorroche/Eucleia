@@ -1,8 +1,12 @@
 import { React } from 'react'
 
-export const BaseButton = ({ label }) => {
+export const BaseButton = ({ label, submit, callback }) => {
+
+  // const click = () => {
+  //   callbacka();
+  // }
 
   return(
-    <button className="baseButton">{label}</button>
+    <button className="baseButton" type={submit ? "submit" : "button"} onClick={callback}>{label}</button>
   )
 }

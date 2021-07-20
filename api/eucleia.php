@@ -55,6 +55,8 @@ function getTransfers($bdd)
 	echo json_encode($response);
 }
 
+// MAIN --------------------------------
+
 switch($request_method)
 {
 	
