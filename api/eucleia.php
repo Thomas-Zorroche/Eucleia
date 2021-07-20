@@ -30,6 +30,30 @@ function getValues($bdd)
 	echo json_encode($response);
 }
 
+function getTransfers($bdd)
+{
+	$query = $bdd->query(
+		'SELECT transfer.value,transfer.date, transfer.comment, transfer.perso, transfer.id, user.pseudo, type.label
+			FROM transfer
+			INNER JOIN type ON type.id_type = transfer.id_type 
+			INNER JOIN user ON user.id_user = transfer.id_user');
+	$response = array();
+	while($resultats = $query->fetch())
+	{
+		$transfer = array(
+			"id" => $resultats['id'],
+			"user" => $resultats['pseudo'],
+			"value" => $resultats['value'],
+			"type" => $resultats['label'],
+			"date" => $resultats['date'],
+			"perso" => $resultats['perso'],
+			"comment" => $resultats['comment']
+		);
+		array_push($response, $transfer);
+	}
+
+	echo json_encode($response);
+}
 
 switch($request_method)
 {
@@ -45,6 +69,9 @@ switch($request_method)
 					break;
 				case 'dates':
 					getDates($bdd);
+					break;
+				case 'transfers':
+					getTransfers($bdd);
 					break;
 			}
 		}

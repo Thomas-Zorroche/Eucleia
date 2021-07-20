@@ -1,7 +1,7 @@
 import { React } from 'react'
 import '../../style/component.css'
 
-export const Transfer = ({ index, user, value, date, comment}) => {
+export const Transfer = ({ index, user, type, value, date, perso, comment}) => {
 
   return (
     <div className="transferContainer" 
@@ -9,11 +9,11 @@ export const Transfer = ({ index, user, value, date, comment}) => {
     >
       <p className="transferUser" >{user}</p>
 
-      <p className="transferPerso">o</p>
+      <p className="transferPerso">{perso === "1" ? "o" : "n" }</p>
 
       <p className="transferDate">{date}</p>
 
-      <p className="transferType">COURSES</p>
+      <p className="transferType">{type}</p>
 
       <p className="transferComment" style={{flexGrow:4}}>{comment}</p>
 
