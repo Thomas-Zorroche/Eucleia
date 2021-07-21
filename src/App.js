@@ -13,13 +13,12 @@ function App() {
   return (
     <div className="App">
 
-      <header className="App-header"></header>
-
-      <MenuBar />
-
       <HeaderBar />
-
-      <Main />
+      
+      <div id="Container-App">
+        <MenuBar />
+        <Main />
+      </div>
 
     </div>
   );
