@@ -1,15 +1,18 @@
 import { React } from 'react'
 
+import { EDateOption } from '../../pages/AddTransfertPage'
+
 import '../../style/component.css'
 
-export const FormAddTransfert = ({ index }) => {
-
-  console.log(index)
+export const FormAddTransfert = ({ index, dateOption }) => {
 
   return(
     <div className="formAddTransfer">
       <div>
-        <input type="date" name={"date_" + index}  min="2020-01-01" max="2022-12-31" required></input>
+        {dateOption === EDateOption.Date ? 
+          <input type="date" name={"date_" + index}  min="2020-01-01" max="2021-12-31" required></input> 
+          : <input type="number" name={"date_" + index} min="1" max="31" required /> 
+        }
       </div>
 
       <div>

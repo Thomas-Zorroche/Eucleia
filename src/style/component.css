@@ -16,7 +16,7 @@
   align-items: center;
 }
 h1 {
-  margin-left: 50px;
+
 }
 
 /* BUTTONS */
@@ -198,5 +198,23 @@ h1 {
   flex-basis: 0;
   flex-grow: 1;
   font-weight: bold;
+}
+
+
+/* Container Forms */
+.container-options {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  padding: 20px;
+  margin-top: 25px;
+  border: 1px solid;
+  border-color: rgb(124, 124, 124);
+  border-radius: 5px;
+  background-color: var(--greyDark);
+  
+  font-size: 20px;
 }
 
