@@ -30,7 +30,7 @@ export const VirementPage = () => {
     <div id="Page">
       <h1>Virements</h1>
 
-      <Link to="/addTransfert">
+      <Link to="/addTransfer">
         <BaseButton label={"Ajout Virement"} />
       </Link>
 

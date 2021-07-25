@@ -1,10 +1,10 @@
 import { React } from 'react'
 
-import { EDateOption } from '../../pages/AddTransfertPage'
+import { EDateOption } from '../../pages/AddTransferPage'
 
 import '../../style/component.css'
 
-export const FormAddTransfert = ({ index, dateOption }) => {
+export const FormAddTransfer = ({ index, dateOption }) => {
 
   return(
     <div className="formAddTransfer">

@@ -1,6 +1,6 @@
-import { React, useEffect, useState, Children } from 'react'
+import { React, useEffect, useState } from 'react'
 
-import { FormAddTransfert } from '../components/ui/FormAddTransfert'
+import { FormAddTransfer } from '../components/ui/FormAddTransfer'
 import { BaseButton } from '../components/ui/BaseButton'
 
 
@@ -12,7 +12,7 @@ export const EDateOption = {
   Date: "Date"                  // Date précise
 }
 
-export const AddTransfertPage = () => {
+export const AddTransferPage = () => {
 
   const [transferCount, setTransferCount] = useState(1);
   const [dateOption, setDateOption] = useState(EDateOption.CurrentMonth);
@@ -85,7 +85,7 @@ export const AddTransfertPage = () => {
         </div>
 
         {Array(transferCount).fill().map((t, i) => 
-          <FormAddTransfert key={i} index={i} dateOption={dateOption}/>
+          <FormAddTransfer key={i} index={i} dateOption={dateOption}/>
         )}
 
         <BaseButton label="Ajouter" submit={true} callback={null}/>
