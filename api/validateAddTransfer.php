@@ -3,124 +3,131 @@
 // Connection file to the database
 include("db_connect.php");
 
-if (isset($_POST["transferCount"]) && isset($_POST["pseudo"]))
+// If data can be sent to database. If false, this means an error happened.
+$VALID_FORM = true;
+
+function getValue( &$value, $label)
 {
-  $pseudo = $_POST["pseudo"];
-  $transferCount = $_POST["transferCount"];
-  $error = false;
-  for($i = 0; $i < $transferCount; $i++)
+  global $validForm;
+  if (!isset($_POST[$label]))
   {
-    // VALUE
-    if (isset($_POST["value_" . strval($i)]))
-    {
-      $value = $_POST["value_" . strval($i)]; 
-    } 
-    else 
-    { 
-      echo("Value Error. "); 
-      $error = true; 
-      break; 
-    }
-
-    // DATE
-    if (isset($_POST["date_" . strval($i)]))
-    {
-      // Check whether date option exists or not
-      if (!isset($_POST["date_option"]))
-      {
-        echo("Date Option Error. "); 
-        $error = true; 
-        break;
-      } 
-
-      // Date Format: YYYY-MM-DD
-      if ($_POST["date_option"] == "complete") 
-      {
-        $date = $_POST["date_" . strval($i)];
-      }
-      // Date Format: DD
-      else
-      {
-        // Retrieve current month
-        if ($_POST["date_option"] == "current_month")
-        {
-          $month = date("m");
-        }
-        // Retrieve month choice
-        else if ($_POST["date_option"] == "other_month")
-        {
-          if (!isset($_POST["month_choice"])) 
-          {
-            echo("Month Choice Error. "); 
-            $error = true; 
-            break;
-          }
-          $month = $_POST["month_choice"];
-        }
-        else
-        {
-          echo("Invalid Date Option."); 
-          $error = true; 
-          break;
-        }
-
-        $year = date("Y");
-        $date = $year . "-" . $month . "-" . $_POST["date_" . strval($i)];
-      }
-    }  
-    else 
-    { 
-      echo("Date Error. "); 
-      $error = true; 
-      break; 
-    }
-
-    // TYPE
-    if (isset($_POST["type_" . strval($i)])) $type = $_POST["type_" . strval($i)]; 
-    else { echo("Type Error. "); $error = true; break; }
-
-    // COMMENT
-    if (isset($_POST["comment_" . strval($i)])) $comment = $_POST["comment_" . strval($i)]; 
-    else { echo("Comment Error. "); $error = true; break; }
-
-    // PERSO
-    if (isset($_POST["perso_" . strval($i)])) $perso = 1; 
-    else { $perso = 0; }
-
-    // Add transfer into database
-    $req = $bdd->exec("INSERT INTO transfer (
-      id_user, 
-      id_type, 
-      value, 
-      date, 
-      perso, 
-      comment)
-    VALUES (
-      (SELECT id_user FROM user WHERE pseudo = '$pseudo'), 
-      (SELECT id_type FROM type WHERE label = '$type'), 
-      '$value',
-      '$date',
-      '$perso',
-      '$comment')");
+    echo ("[ERROR] validateAddTransfer: Invalid" . $label);
+    $VALID_FORM = false;
+    return false;
   }
 
-  if (!$error)
+  $value = $_POST[$label];
+  return true;
+}
+
+function getDateValue(&$date, $label)
+{
+  if (!isset($_POST[$label]))
   {
-    echo "<script type='text/javascript'>alert('" . $transferCount . " virements ajoutés.')</script>";
-    echo '<meta http-equiv="refresh" content="0; url=http://localhost:3000/virements">';
+    echo ("[ERROR] validateAddTransfer: Invalid" . $label);
+    $VALID_FORM = false;
+    return false;
   }
+
+  // Retrieve date_option (CurrentMonth, OtherMonth, Complete)
+  if (!getValue($dateOption, "date_option"))
+    return false;
+
+  // Date Format: YYYY-MM-DD
+  if ($dateOption == "complete") 
+  {
+    $date = $_POST[$label];
+    return true;
+  }
+  // Date Format: DD
   else
   {
-    echo("Problème formulaire, veuillez réessayer.");
+    // Retrieve current month
+    if ($dateOption == "current_month")
+    {
+      $month = date("m");
+    }
+    // Retrieve month choice
+    else if ($dateOption == "other_month")
+    {
+      if (!getValue($month, "month_choice"))
+        return false;
+    }
+    else
+    {
+      echo ("[ERROR] validateAddTransfer: Invalid date_option (2)");
+      return false;
+    }
+
+    $year = date("Y");
+    $date = $year . "-" . $month . "-" . $_POST[$label];
+    return true;
   }
-
-
 }
 
+
+// ---------------------------------------------------------------
+// --------------------- validateAddTransfer ---------------------
+// ---------------------------------------------------------------
+
+getValue($pseudo, "pseudo");
+getValue($transferCount, "transferCount");
+
+if (!$VALID_FORM) return;
+
+$transferSuccess = 0;
+for($i = 0; $i < $transferCount; $i++)
+{
+  if (!getValue($value, "value_" . strval($i)))     break;
+
+  if (!getDateValue($date, "date_" . strval($i)))        break;
+
+  if (!getValue($type, "type_" . strval($i)))       break;
+
+  if (!getValue($comment, "comment_" . strval($i))) break;
+
+  // Special case: checkbox
+  $perso = (isset($_POST["perso_" . strval($i)])) ? 1 : 0; 
+
+  // Add transfer into database
+  $req = $bdd->exec("INSERT INTO transfer (
+    id_user, 
+    id_type, 
+    value, 
+    date, 
+    perso, 
+    comment)
+  VALUES (
+    (SELECT id_user FROM user WHERE pseudo = '$pseudo'), 
+    (SELECT id_type FROM type WHERE label = '$type'), 
+    '$value',
+    '$date',
+    '$perso',
+    '$comment')");
+
+  $transferSuccess++;
+}
+
+if ($VALID_FORM && $transferSuccess == $transferCount)
+{
+  echo "<script type='text/javascript'>alert('" . $transferCount . " virements ajoutés.')</script>";
+  echo '<meta http-equiv="refresh" content="0; url=http://localhost:3000/virements">';
+}
+else if (!$VALID_FORM && $transferSuccess != 0)
+{
+  echo "<script type='text/javascript'>alert('Erreur Formulaire, seulement " . $transferSuccess . " virements ajoutés.')</script>";
+  echo '<meta http-equiv="refresh" content="0; url=http://localhost:3000/virements">';
+}
+else if (!$VALID_FORM && $transferSuccess == 0)
+{
+  echo "<script type='text/javascript'>alert('Erreur Formulaire, aucun virement ajouté.')</script>";
+  echo '<meta http-equiv="refresh" content="0; url=http://localhost:3000/virements">';
+}
 else
 {
-  echo("Problème serveur");
-  http_response_code(404);
+  echo "<script type='text/javascript'>alert('PROBLEME SERVEUR: " . $VALID_FORM . " - " . $transferSuccess . "')</script>";
+  echo '<meta http-equiv="refresh" content="0; url=http://localhost:3000/virements">';
 }
+
 
 ?>
