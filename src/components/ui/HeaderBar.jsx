@@ -1,6 +1,11 @@
 import { local, pointer } from 'd3'
 import { React, useState, useEffect } from 'react'
 import { HeaderValueViewer } from './HeaderValueViewer'
+import { Link } from "react-router-dom"
+
+const getFirstLetter = (string) => {
+  return string.substring(0, 1).toUpperCase();
+} 
 
 
 export const HeaderBar = () => {
@@ -12,6 +17,8 @@ export const HeaderBar = () => {
     localStorage.setItem("userConnected", "")
     window.location.pathname = "/login";
   }
+
+  console.log(localStorage.getItem("userColor"))
 
   return (
     <div id="HeaderBar" style={{display: isLogin ? "flex" : "none"}}>
@@ -28,7 +35,9 @@ export const HeaderBar = () => {
 
 
       <div id="HeaderRight">
-        <p>{localStorage.getItem("userConnected")}</p>
+        <Link to="/user">
+          <p className="pseudoCircle" style={{backgroundColor: localStorage.getItem("userColor")}}>{getFirstLetter(localStorage.getItem("userConnected"))}</p>
+        </Link>
 
         <p className='logout' onClick={() => logOut()}>Log Out</p>
       </div>

@@ -7,6 +7,7 @@ import { AccueilPage } from '../pages/AccueilPage';
 import { VirementPage } from '../pages/VirementsPage';
 import { GraphiquePage } from '../pages/GraphiquesPage';
 import { AddTransferPage } from '../pages/AddTransferPage';
+import { UserPage } from '../pages/UserPage';
 
 export const Main = () => {
   return (
@@ -21,6 +22,9 @@ export const Main = () => {
       <ProtectedRoute exact path='/addTransfer' component={AddTransferPage}></ProtectedRoute>
 
       <ProtectedRoute exact path='/graphiques' component={GraphiquePage}></ProtectedRoute>
+
+      <ProtectedRoute exact path='/user' component={UserPage}></ProtectedRoute>
+
       
     </Switch>
   );

@@ -13,7 +13,7 @@ function getValue( &$value, $label)
   global $validForm;
   if (!isset($_POST[$label]))
   {
-    echo ("[ERROR] validateLogin: Invalid" . $label);
+    echo json_encode("[ERROR] validateLogin: Invalid" . $label);
     $VALID_FORM = false;
     return false;
   }
@@ -31,7 +31,7 @@ if (!getValue($pseudo, "pseudo"))     return;
 if (!getValue($password, "password")) return;
 
 //  Retrieve pseudo and password from database
-$req = $bdd->prepare('SELECT password FROM user WHERE pseudo = :pseudo');
+$req = $bdd->prepare('SELECT password, color FROM user WHERE pseudo = :pseudo');
 $req->execute(array(
   'pseudo' => $pseudo));
 $resultat = $req->fetch();
@@ -40,12 +40,21 @@ $isPasswordCorrect = password_verify($password, $resultat['password']);
 
 if (!$resultat || !$isPasswordCorrect)
 {
-  echo '1'; // Login Failed
+  $response = array(
+    "login" => false,
+    "user" => "",
+    "userColor" => ""
+  );
+  echo json_encode($response);
 }
 else if ($isPasswordCorrect)
 {
-  echo '0'; // Login Succeed
-
+  $response = array(
+    "login" => true,
+    "user" => $pseudo,
+    "userColor" => $resultat["color"]
+  );
+  echo json_encode($response);
 }
 
 

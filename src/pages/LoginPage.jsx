@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BaseButton } from '../components/ui/BaseButton'
 
 export const LoginPage = () => {
@@ -14,7 +14,6 @@ export const LoginPage = () => {
   }, [])
 
   const onLogin = () => {
-    // create formData, send to PHP, receive connected and pseudoConnected
     const form = new FormData();
     form.append("pseudo", pseudo);
     form.append("password", password);
@@ -24,23 +23,21 @@ export const LoginPage = () => {
       body: form
     })
     .then(res => {
-      return res.text();
+      return res.json();
     })
-    .then( body => {
+    .then( loginData => {
 
-      if (body === '0') // NO ERROR: LOG IN
+      if (loginData.login) // NO ERROR: LOG IN
       {
         localStorage.setItem("isLogin", true);
-        localStorage.setItem("userConnected", pseudo)
+        localStorage.setItem("userConnected", loginData.user)
+        localStorage.setItem("userColor", loginData.userColor)
+
         window.location.pathname = "/";
       }
-      else if (body === '1') // ERROR: TRY AGAIN
+      else if (!loginData.login) // ERROR: TRY AGAIN
       {
         setLoginFailed(true);
-      }
-      else  // SERVER ERROR
-      {
-        console.error(body);
       }
     })
 
@@ -65,7 +62,9 @@ export const LoginPage = () => {
 
         <form>
           <input type="text" name="pseudo" placeholder="username" value={pseudo} onChange={(e) => updatePseudo(e)} required/>
+
           <input type="password" name="password" placeholder="password" defaultValue={password} onChange={(e) => updatePassword(e)} required/>
+          
           <BaseButton label="Log" submit={false} callback={onLogin}/>
         </form>
 
