@@ -110,7 +110,7 @@ for($i = 0; $i < $transferCount; $i++)
 
 if ($VALID_FORM && $transferSuccess == $transferCount)
 {
-  echo "<script type='text/javascript'>alert('" . $transferCount . " virements ajoutés.')</script>";
+  echo "<script type='text/javascript'>alert('" . $transferCount . " virements ajoutés sur le compte de " . $pseudo . ".')</script>";
   echo '<meta http-equiv="refresh" content="0; url=http://localhost:3000/virements">';
 }
 else if (!$VALID_FORM && $transferSuccess != 0)
