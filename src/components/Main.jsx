@@ -1,6 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { ProtectedRoute } from './ProtectedRoute';
 
+import { LoginPage } from '../pages/LoginPage';
 import { AccueilPage } from '../pages/AccueilPage';
 import { VirementPage } from '../pages/VirementsPage';
 import { GraphiquePage } from '../pages/GraphiquesPage';
@@ -10,13 +12,15 @@ export const Main = () => {
   return (
     <Switch> {/* The Switch decides which component to show based on the current URL.*/}
 
-      <Route exact path='/' component={AccueilPage}></Route>
+      <Route exact path='/login' component={LoginPage}></Route>
 
-      <Route exact path='/virements' component={VirementPage}></Route>
+      <ProtectedRoute exact path='/' component={AccueilPage}></ProtectedRoute>
 
-      <Route exact path='/addTransfer' component={AddTransferPage}></Route>
+      <ProtectedRoute exact path='/virements' component={VirementPage}></ProtectedRoute>
 
-      <Route exact path='/graphiques' component={GraphiquePage}></Route>
+      <ProtectedRoute exact path='/addTransfer' component={AddTransferPage}></ProtectedRoute>
+
+      <ProtectedRoute exact path='/graphiques' component={GraphiquePage}></ProtectedRoute>
       
     </Switch>
   );

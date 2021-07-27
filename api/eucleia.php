@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Headers: Content-Type');
 
+
 // Connect to database
 include("db_connect.php");
 $request_method = $_SERVER["REQUEST_METHOD"];
@@ -55,6 +56,21 @@ function getTransfers($bdd)
 	echo json_encode($response);
 }
 
+function getUserConnected($bdd)
+{
+	if (isset($_SESSION['pseudo']))
+	{
+		echo json_encode($_SESSION['pseudo']);
+	}
+	else
+	{
+		echo json_encode("not connected");
+	}
+
+
+
+}
+
 // MAIN --------------------------------
 
 switch($request_method)
@@ -74,6 +90,10 @@ switch($request_method)
 					break;
 				case 'transfers':
 					getTransfers($bdd);
+					break;
+
+				case 'userConnected':
+					getUserConnected($bdd);
 					break;
 			}
 		}

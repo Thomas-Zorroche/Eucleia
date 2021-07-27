@@ -36,7 +36,7 @@ export const GraphiquePage = () => {
   }, [])
 
   return (
-    <div>
+    <div id="Page">
         <h1>Graphiques</h1>
 
         <BarChart
