@@ -40,8 +40,8 @@ export const GraphiquePage = () => {
         <h1>Graphiques</h1>
 
         <BarChart
-          width={750}
-          height={300} 
+          width={1500}
+          height={750} 
           dataX={dataX} 
           dataY={dataY} 
       />

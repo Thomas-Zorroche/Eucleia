@@ -79,6 +79,7 @@ export const AddTransferPage = () => {
         <div className="formAddTransfer addTransfertHeader">
           <div>Date</div>
           <div>Valeur</div>
+          <div>Secret</div>
           <div>Perso</div>
           <div>Type</div>
           <div>Commentaires</div>

@@ -47,7 +47,6 @@ export const LoginPage = () => {
     setPseudo(e.target.value)
     
   }
-
   const updatePassword = (e) => {
     setPassword(e.target.value)
   }
@@ -56,6 +55,8 @@ export const LoginPage = () => {
     <div id="Page">
 
       <div id="LoginContainer">
+        <h1>Eucleia 0.1</h1>
+        
         <h1>Login</h1>
 
         {loginFailed && <p className="loginFailedWarning">Mauvais identifiant ou mot de passe !</p>}

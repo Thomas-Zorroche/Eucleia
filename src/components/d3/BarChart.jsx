@@ -45,7 +45,7 @@ export const BarChart = ({ width, height, dataX, dataY }) => {
   return (
     <div>
       <svg height={height} width={width}>
-        <rect width="100%" height="100%" fill="white" />      
+        <rect width="100%" height="100%" fill="#333333" />      
         <g transform={`translate(${margin.left}, ${margin.top})`}>
 
           {yScale.ticks().map((tickValue) => 
@@ -80,7 +80,7 @@ export const BarChart = ({ width, height, dataX, dataY }) => {
               y={yScale(value)}
               height={innerHeight - yScale(value)}
               bandwidth={xScale.bandwidth()}
-              color={"#a745f5"}
+              color={localStorage.getItem("userColor")}
             />
           )}
 

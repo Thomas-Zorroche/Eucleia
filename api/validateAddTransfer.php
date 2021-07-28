@@ -87,7 +87,16 @@ for($i = 0; $i < $transferCount; $i++)
   if (!getValue($comment, "comment_" . strval($i))) break;
 
   // Special case: checkbox
-  $perso = (isset($_POST["perso_" . strval($i)])) ? 1 : 0; 
+  $secret = (isset($_POST["secret_" . strval($i)])) ? 1 : 0; 
+  if ($secret)
+  {
+    $perso = true;  // If secret, perso active by default
+  }
+  else
+  {
+    $perso = (isset($_POST["perso_" . strval($i)])) ? 1 : 0; 
+  }
+
 
   // Add transfer into database
   $req = $bdd->exec("INSERT INTO transfer (
@@ -96,14 +105,16 @@ for($i = 0; $i < $transferCount; $i++)
     value, 
     date, 
     perso, 
-    comment)
+    comment,
+    secret)
   VALUES (
     (SELECT id_user FROM user WHERE pseudo = '$pseudo'), 
     (SELECT id_type FROM type WHERE label = '$type'), 
     '$value',
     '$date',
     '$perso',
-    '$comment')");
+    '$comment',
+    '$secret')");
 
   $transferSuccess++;
 }

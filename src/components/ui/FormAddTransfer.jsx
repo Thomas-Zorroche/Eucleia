@@ -1,10 +1,16 @@
-import { React } from 'react'
+import { React, useState } from 'react'
 
 import { EDateOption } from '../../pages/AddTransferPage'
 
 import '../../style/component.css'
 
 export const FormAddTransfer = ({ index, dateOption }) => {
+
+  const [secret, setSecret] = useState(false)
+
+  const updateSecret = (e) => {
+    setSecret(secret ? false : true);
+  }
 
   return(
     <div className="formAddTransfer">
@@ -18,9 +24,13 @@ export const FormAddTransfer = ({ index, dateOption }) => {
       <div>
         <input type="number" name={"value_" + index} min="0" max="10000" required />
       </div>
+
+      <div>
+        <input type="checkbox" name={"secret_" + index} onChange={(e) => updateSecret(e)}/>
+      </div>
       
       <div>
-        <input type="checkbox" name={"perso_" + index} />
+        <input type="checkbox" name={"perso_" + index} disabled={secret} />
       </div>
 
       <div>

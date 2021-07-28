@@ -44,7 +44,7 @@ export const VirementPage = () => {
           <p>Value</p>
         </div>
         {transfers.map((t, i) => 
-          <Transfer key={t.id} index={i} perso={t.perso} user={t.user} type={t.type} value={t.value} date={t.date} comment={t.comment} />
+          <Transfer key={t.id} index={i} perso={t.perso} secret={t.secret} user={t.user} type={t.type} value={t.value} date={t.date} comment={t.comment} />
         )}
       </div>
 

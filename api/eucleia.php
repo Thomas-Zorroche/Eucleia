@@ -34,7 +34,7 @@ function getValues($bdd)
 function getTransfers($bdd)
 {
 	$query = $bdd->query(
-		'SELECT transfer.value,transfer.date, transfer.comment, transfer.perso, transfer.id, user.pseudo, type.label
+		'SELECT transfer.value,transfer.date, transfer.comment, transfer.perso, transfer.secret, transfer.id, user.pseudo, type.label
 			FROM transfer
 			INNER JOIN type ON type.id_type = transfer.id_type 
 			INNER JOIN user ON user.id_user = transfer.id_user');
@@ -48,6 +48,7 @@ function getTransfers($bdd)
 			"type" => $resultats['label'],
 			"date" => $resultats['date'],
 			"perso" => $resultats['perso'],
+			"secret" => $resultats['secret'],
 			"comment" => $resultats['comment']
 		);
 		array_push($response, $transfer);
