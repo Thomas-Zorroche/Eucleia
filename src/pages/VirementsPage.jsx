@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 
-
 import { Transfer } from '../components/ui/Transfer';
 import { BaseButton } from '../components/ui/BaseButton';
+
 
 async function queryDatabase(query) {
   const response = await fetch("http://localhost/Eucleia/api/eucleia/?q=" + query, {
@@ -13,7 +13,8 @@ async function queryDatabase(query) {
   return json;
 }
 
-export const VirementPage = () => {
+
+export const VirementPage = ({ usersDatas }) => {
 
   const [transfers, setTransfers] = useState([])
 
@@ -25,6 +26,7 @@ export const VirementPage = () => {
 
     loadData();
   }, [])
+
 
   return (
     <div id="Page">
@@ -44,7 +46,7 @@ export const VirementPage = () => {
           <p>Value</p>
         </div>
         {transfers.map((t, i) => 
-          <Transfer key={t.id} index={i} perso={t.perso} secret={t.secret} user={t.user} type={t.type} value={t.value} date={t.date} comment={t.comment} />
+          <Transfer key={t.id} index={i} perso={t.perso} secret={t.secret} user={t.user} type={t.type} value={t.value} date={t.date} comment={t.comment} userColors={usersDatas.get(t.user) || {}} />
         )}
       </div>
 

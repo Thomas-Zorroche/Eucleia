@@ -18,8 +18,6 @@ export const HeaderBar = () => {
     window.location.pathname = "/login";
   }
 
-  console.log(localStorage.getItem("userColor"))
-
   return (
     <div id="HeaderBar" style={{display: isLogin ? "flex" : "none"}}>
 

@@ -2,7 +2,9 @@ import { React, useEffect, useState } from 'react'
 import '../../style/component.css'
 import { BaseButton } from './BaseButton';
 
-export const Transfer = ({ index, user, type, value, date, perso, secret, comment}) => {
+import { getUserColors } from "../../common/colors.js" 
+
+export const Transfer = ({ index, user, type, value, date, perso, secret, comment, userColors}) => {
 
   const [isSecret, setIsSecret] = useState((secret === "1") ? true : false)
   const [backgroundColor, setBackgroundColor] = useState("")
@@ -12,10 +14,10 @@ export const Transfer = ({ index, user, type, value, date, perso, secret, commen
 
   useEffect(() => {
     if (index % 2) {
-      setBackgroundColor("var(--greyDark)");
+      setBackgroundColor(userColors['color-dark']);
     }
     else{
-      setBackgroundColor("var(--grey)");
+      setBackgroundColor(userColors['color-dark-light']);
     }
   }, [])
 

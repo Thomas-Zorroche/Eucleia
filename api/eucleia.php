@@ -57,20 +57,23 @@ function getTransfers($bdd)
 	echo json_encode($response);
 }
 
-function getUserConnected($bdd)
+function getUsersDatas($bdd)
 {
-	if (isset($_SESSION['pseudo']))
+	$query = $bdd->query('SELECT pseudo, color FROM user');
+	$response = array();
+	while($resultats = $query->fetch())
 	{
-		echo json_encode($_SESSION['pseudo']);
+		$user = array(
+			"pseudo" => $resultats['pseudo'],
+			"color" => $resultats['color']
+		);
+		array_push($response, $user);
 	}
-	else
-	{
-		echo json_encode("not connected");
-	}
 
-
-
+	echo json_encode($response);
 }
+
+
 
 // MAIN --------------------------------
 
@@ -92,9 +95,8 @@ switch($request_method)
 				case 'transfers':
 					getTransfers($bdd);
 					break;
-
-				case 'userConnected':
-					getUserConnected($bdd);
+				case 'usersDatas':
+					getUsersDatas($bdd);
 					break;
 			}
 		}
