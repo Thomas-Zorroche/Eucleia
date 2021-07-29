@@ -14,18 +14,45 @@ async function queryDatabase(query) {
 }
 
 
-export const VirementPage = ({ usersDatas }) => {
+
+
+export const VirementPage = ({ usersDatas, dateFilter }) => {
 
   const [transfers, setTransfers] = useState([])
 
-  useEffect(() => {
-    async function loadData()
+  async function loadData(dateFilter) {
+    if (dateFilter)
+    {
+      const form = new FormData();
+      form.append("dateFilterType", dateFilter.type);
+      form.append("dateFilterValue", dateFilter.value + 1);
+
+      fetch("http://localhost/Eucleia/api/getTransfers.php", {
+        method: "POST",
+        body: form
+      })
+      .then(res => {
+        return res.json();
+      })
+      .then( transfers => {
+        setTransfers(transfers);
+      })
+
+    }
+    else
     {
       setTransfers(await queryDatabase("transfers"));
     }
+  }
 
+  useEffect(() => {
+    setTransfers(transfers);
     loadData();
   }, [])
+
+  useEffect(() => {
+    loadData(dateFilter);
+  }, [dateFilter])
 
 
   return (

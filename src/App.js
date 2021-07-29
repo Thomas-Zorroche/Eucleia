@@ -7,6 +7,7 @@ import { React, useEffect, useState } from 'react'
 import { MenuBar } from './components/ui/MenuBar'
 import { HeaderBar } from './components/ui/HeaderBar'
 import { Main } from './components/Main'
+import { EDateFilter, Footer } from './components/ui/Footer';
 
 import { getColorVariants } from "./common/colors.js"
 
@@ -21,7 +22,10 @@ async function queryDatabase(query) {
 
 function App() {
 
+  // Map of datas ["Pseudo" --> mainColor]  
   const [usersDatas, setUsersDatas] = useState(new Map())
+  // Type of Filter and value
+  const [dateFilter, setDateFilter] = useState({type: EDateFilter.MONTH, value:""})
 
   useEffect(() => {
     async function loadUsersDatas()
@@ -38,6 +42,10 @@ function App() {
     loadUsersDatas();
   }, [])
 
+  const onDateFilterChange = (newFilter) => {
+    setDateFilter(newFilter)
+  }
+
   return (
     <div className="App">
 
@@ -45,8 +53,10 @@ function App() {
       
       <div id="Container-App">
         <MenuBar />
-        <Main usersDatas={usersDatas} />
+        <Main usersDatas={usersDatas} dateFilter={dateFilter} />
       </div>
+
+      <Footer onDateFilterChange={onDateFilterChange}/>
 
     </div>
   );

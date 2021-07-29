@@ -13,7 +13,7 @@ export const UserPage = () => {
 
 
   const changePassword = () => {
-    if (newPassword != newPasswordConfirmed)
+    if (newPassword !== newPasswordConfirmed)
     {
       setUpdateMessage("Les mots de passes ne sont pas identiques, veuillez réessayer.")
       return;

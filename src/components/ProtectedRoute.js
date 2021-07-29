@@ -8,7 +8,9 @@ export const ProtectedRoute = ({ component: Component, ...restOfProps }) => {
     <Route
       {...restOfProps}
       render={(props) =>
-        isLogin ? <Component {...props} usersDatas={restOfProps.usersDatas || {}} /> : <Redirect to="/login" />
+        isLogin ? <Component 
+          {...props} usersDatas={restOfProps.usersDatas || {}} dateFilter={restOfProps.dateFilter || {}}
+        /> : <Redirect to="/login" />
       }
     />
   );

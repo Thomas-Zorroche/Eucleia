@@ -9,7 +9,7 @@ import { GraphiquePage } from '../pages/GraphiquesPage';
 import { AddTransferPage } from '../pages/AddTransferPage';
 import { UserPage } from '../pages/UserPage';
 
-export const Main = ({ usersDatas }) => {
+export const Main = ({ usersDatas, dateFilter }) => {
 
   return (
     <Switch> {/* The Switch decides which component to show based on the current URL.*/}
@@ -18,7 +18,7 @@ export const Main = ({ usersDatas }) => {
 
       <ProtectedRoute exact path='/' component={AccueilPage}></ProtectedRoute>
 
-      <ProtectedRoute exact path='/virements' usersDatas={usersDatas} component={VirementPage}></ProtectedRoute>
+      <ProtectedRoute exact path='/virements' usersDatas={usersDatas} dateFilter={dateFilter} component={VirementPage}></ProtectedRoute>
 
       <ProtectedRoute exact path='/addTransfer' component={AddTransferPage}></ProtectedRoute>
 
