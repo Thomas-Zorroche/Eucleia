@@ -3,9 +3,9 @@ export const getColorVariants = (color) => {
   const hslColor = hexToHSL(color);
 
   const userColors = {
-    "color": color,
-    "color-dark": getDarkColor(hslColor),
-    "color-dark-light": getDarkLightColor(hslColor),
+    color: color,
+    colorDark: getDarkColor(hslColor),
+    colorDarkLight: getDarkLightColor(hslColor),
   }
 
   return userColors;

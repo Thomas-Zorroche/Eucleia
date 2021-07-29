@@ -2,23 +2,25 @@ import { React, useEffect, useState } from 'react'
 import '../../style/component.css'
 import { BaseButton } from './BaseButton';
 
-import { getUserColors } from "../../common/colors.js" 
+import { getUserIndexByPseudo } from '../../common/common';
 
-export const Transfer = ({ index, user, type, value, date, perso, secret, comment, userColors}) => {
+export const Transfer = ({ index, pseudo, type, value, date, perso, secret, comment, usersDatas}) => {
 
   const [isSecret, setIsSecret] = useState((secret === "1") ? true : false)
   const [backgroundColor, setBackgroundColor] = useState("")
   const [tvalue, setTValue] = useState(isSecret ? 0 : value)
   const [password, setPassword] = useState("")
 
-
   useEffect(() => {
-    if (index % 2) {
-      setBackgroundColor(userColors['color-dark']);
+    const userIndex = getUserIndexByPseudo(usersDatas, pseudo);
+
+    if (userIndex === -1)
+    {
+      console.error("TRANSFER: CANT FIND PSEUDO")
+      return;
     }
-    else{
-      setBackgroundColor(userColors['color-dark-light']);
-    }
+
+    setBackgroundColor(perso === "1" ? usersDatas[userIndex].colors.colorDark : usersDatas[userIndex].colors.colorDarkLight);
   }, [])
 
   const updatePassword = (e) => {
@@ -59,7 +61,7 @@ export const Transfer = ({ index, user, type, value, date, perso, secret, commen
         style={{backgroundColor: backgroundColor}}
       >
 
-        <p className="transferUser" >{user}</p>
+        <p className="transferUser" >{pseudo}</p>
 
         <p className="transferPerso">{perso === "1" ? "o" : "n" }</p>
 

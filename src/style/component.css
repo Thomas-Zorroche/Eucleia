@@ -154,8 +154,6 @@ h1 {
   flex-direction: column;
   width: 75%;
   
-  border: 1px solid;
-  border-color: rgb(131, 131, 131);
   filter: drop-shadow(0 0 0.55rem rgb(26, 26, 26));
   font-size: 20px;
   margin: 50px;
@@ -167,6 +165,8 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  border-bottom: 1px solid rgb(139, 139, 139);
 }
 .transferContainerSecret {
   -webkit-filter: blur(15px);
@@ -212,7 +212,11 @@ h1 {
   font-size: 16px;
 }
 .transferValue {
-  font-size: 22px;
+  font-size: 24px;
+  background-color: white;
+  border-radius: 25px;
+  padding: 5px;
+  filter: drop-shadow(0 0 0.5rem rgb(0, 0, 0));
 }
 .transferPerso {
   font-size: 22px;
@@ -315,8 +319,8 @@ h1 {
 
 /* SPINBOX */
 .spinBox-container {
-  width:220px; 
-  max-width:220px; 
+  width: 250px; 
+  max-width: 250px; 
   display: flex;
   flex-direction:row;
   justify-content: space-between;
@@ -333,6 +337,23 @@ h1 {
   margin: 10px;
   user-select: none; /* supported by Chrome and Opera */
   font-size: 0.8em;
+}
+
+
+/* FilterUserCircle */ 
+.filterUserCircle {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  border: 3px solid white;
+  user-select: none; /* supported by Chrome and Opera */
+}
+
+.filterUserCircle:hover {
+  font-size: 1.1em;
 }
 
 

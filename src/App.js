@@ -10,6 +10,9 @@ import { Main } from './components/Main'
 import { EDateFilter, Footer } from './components/ui/Footer';
 
 import { getColorVariants } from "./common/colors.js"
+import { EFilterUser } from './components/ui/FilterUserCircle';
+import { getUserIndexByPseudo } from './common/common';
+import { contourDensity } from 'd3';
 
 
 async function queryDatabase(query) {
@@ -22,21 +25,21 @@ async function queryDatabase(query) {
 
 function App() {
 
-  // Map of datas ["Pseudo" --> mainColor]  
-  const [usersDatas, setUsersDatas] = useState(new Map())
-  // Type of Filter and value
+  // Array of objects containing all user datas { pseudo, { colors }, userFilter }
+  const [usersDatas, setUsersDatas] = useState([])
+  // Type of Filter and value for Date
   const [dateFilter, setDateFilter] = useState({type: EDateFilter.MONTH, value:""})
+
 
   useEffect(() => {
     async function loadUsersDatas()
     {
       const usersDatasRaw = await queryDatabase("usersDatas"); // only pseudo and main color
 
-      const usersMap = new Map();
-      usersDatasRaw.map(user => {
-        usersMap.set(user.pseudo, getColorVariants(user.color))
+      const usersDatasPrepare = usersDatasRaw.map(user => {
+        return { pseudo: user.pseudo, colors: getColorVariants(user.color), userFilter: EFilterUser.PERSO }
       })
-      setUsersDatas(usersMap)
+      setUsersDatas(usersDatasPrepare)
     }
 
     loadUsersDatas();
@@ -45,6 +48,17 @@ function App() {
   const onDateFilterChange = (newFilter) => {
     setDateFilter(newFilter)
   }
+
+  const onUserFilterChange = (newUserFilter, userIndex) => {
+
+    setUsersDatas(usersDatas.map((user, index) => {
+      if (index === userIndex)
+        return {...user, userFilter: newUserFilter}
+      else
+        return user;
+    }))
+  }
+
 
   return (
     <div className="App">
@@ -56,7 +70,7 @@ function App() {
         <Main usersDatas={usersDatas} dateFilter={dateFilter} />
       </div>
 
-      <Footer onDateFilterChange={onDateFilterChange}/>
+      <Footer onDateFilterChange={onDateFilterChange} onUserFilterChange={onUserFilterChange} usersDatas={usersDatas}/>
 
     </div>
   );
