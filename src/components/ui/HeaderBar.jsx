@@ -4,17 +4,20 @@ import { HeaderValueViewer } from './HeaderValueViewer'
 import { Link } from "react-router-dom"
 
 const getFirstLetter = (string) => {
+  if (!string || string.length === 0) 
+    return
+
   return string.substring(0, 1).toUpperCase();
 } 
 
 
 export const HeaderBar = () => {
 
-  const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem("isLogin"))  || false)
+  const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem("isLogin"))  || false)
 
   const logOut = () => {
-    localStorage.setItem("isLogin", false);
-    localStorage.setItem("userConnected", "")
+    sessionStorage.setItem("isLogin", false);
+    sessionStorage.setItem("userConnected", "")
     window.location.pathname = "/login";
   }
 
@@ -34,7 +37,7 @@ export const HeaderBar = () => {
 
       <div id="HeaderRight">
         <Link to="/user">
-          <p className="pseudoCircle" style={{backgroundColor: localStorage.getItem("userColor")}}>{getFirstLetter(localStorage.getItem("userConnected"))}</p>
+          <p className="pseudoCircle" style={{backgroundColor: sessionStorage.getItem("userColor")}}>{getFirstLetter(sessionStorage.getItem("userConnected"))}</p>
         </Link>
 
         <p className='logout' onClick={() => logOut()}>Log Out</p>

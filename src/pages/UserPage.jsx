@@ -20,7 +20,7 @@ export const UserPage = () => {
     }
 
     const form = new FormData();
-    form.append("pseudo", localStorage.getItem("userConnected"));
+    form.append("pseudo", sessionStorage.getItem("userConnected"));
     form.append("password", password);
     form.append("newPassword", newPassword);
     form.append("newPasswordConfirmed", newPasswordConfirmed);
@@ -58,7 +58,7 @@ export const UserPage = () => {
     }
 
     const form = new FormData();
-    form.append("pseudo", localStorage.getItem("userConnected"));
+    form.append("pseudo", sessionStorage.getItem("userConnected"));
     form.append("password", password);
     form.append("newColor", newColor);
 
@@ -80,7 +80,7 @@ export const UserPage = () => {
       }
       else if (response.isPasswordCorrect && response.changeSucceed)
       {
-        localStorage.setItem("userColor", newColor)
+        sessionStorage.setItem("userColor", newColor)
         window.location.pathname = "/user";
       }
     })
@@ -102,7 +102,7 @@ export const UserPage = () => {
   return (
     <div id="Page">
 
-      <h1>Hello {localStorage.getItem("userConnected")}</h1>
+      <h1>Hello {sessionStorage.getItem("userConnected")}</h1>
 
       <form>
         <input type="password" placeholder="password" value={password} onChange={(e) => updatePassword(e)} required/>

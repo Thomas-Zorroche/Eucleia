@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
 export const ProtectedRoute = ({ component: Component, ...restOfProps }) => {
-  const isLogin = JSON.parse(localStorage.getItem("isLogin")) || false;
+  const isLogin = JSON.parse(sessionStorage.getItem("isLogin")) || false;
 
   return (
     <Route

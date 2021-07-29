@@ -28,7 +28,7 @@ export const Transfer = ({ index, user, type, value, date, perso, secret, commen
   const showSecretTransfer = () => {
     const form = new FormData();
     form.append("password", password);
-    form.append("pseudo", localStorage.getItem("userConnected"));
+    form.append("pseudo", sessionStorage.getItem("userConnected"));
 
     fetch("http://localhost/Eucleia/api/validateLogin.php", {
       method: "POST",

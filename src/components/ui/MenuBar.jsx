@@ -13,7 +13,7 @@ export const EMenu = {
 export const MenuBar = () => {
 
   const [activeButtons, setActivesButton] = useState([true, false, false])
-  const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem("isLogin")) || false)
+  const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem("isLogin")) || false)
 
   const changeMenu = (label) => {
     // Change Active Menu
@@ -34,7 +34,7 @@ export const MenuBar = () => {
   }
 
   return (
-    <div id="MenuBar" style={{display: JSON.parse(localStorage.getItem("isLogin")) || false ? "block" : "none"}}>
+    <div id="MenuBar" style={{display: JSON.parse(sessionStorage.getItem("isLogin")) || false ? "block" : "none"}}>
       <ul>
         <Link to="/">
           <MenuButton active={activeButtons[0]} onActiveChanged={changeMenu} label="Accueil"/>

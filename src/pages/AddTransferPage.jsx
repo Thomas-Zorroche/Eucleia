@@ -39,11 +39,11 @@ export const AddTransferPage = () => {
   return (
     <div id="Page">
 
-      <h1>Ajout Virement - {localStorage.getItem("userConnected")} {(dateOption !== EDateOption.Date) ? " - " + months[indexMonth] : ""}</h1>
+      <h1>Ajout Virement - {sessionStorage.getItem("userConnected")} {(dateOption !== EDateOption.Date) ? " - " + months[indexMonth] : ""}</h1>
 
       <form id="FormAddTransfertContainer" method="post" action="http://localhost/Eucleia/api/validateAddTransfer.php">
 
-        <input type="text" name="pseudo" defaultValue={localStorage.getItem("userConnected")} style={{display:'none'}}></input>
+        <input type="text" name="pseudo" defaultValue={sessionStorage.getItem("userConnected")} style={{display:'none'}}></input>
         
         <div id="inputTransferCount">
           <label htmlFor="transferCount">Nombre de virements à ajouter :</label>

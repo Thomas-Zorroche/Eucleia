@@ -9,8 +9,8 @@ export const LoginPage = () => {
 
 
   useEffect(() => {
-    localStorage.setItem("isLogin", false);
-    localStorage.setItem("userConnected", "")
+    sessionStorage.setItem("isLogin", false);
+    sessionStorage.setItem("userConnected", "")
   }, [])
 
   const onLogin = () => {
@@ -29,9 +29,9 @@ export const LoginPage = () => {
 
       if (loginData.login) // NO ERROR: LOG IN
       {
-        localStorage.setItem("isLogin", true);
-        localStorage.setItem("userConnected", loginData.user)
-        localStorage.setItem("userColor", loginData.userColor)
+        sessionStorage.setItem("isLogin", true);
+        sessionStorage.setItem("userConnected", loginData.user)
+        sessionStorage.setItem("userColor", loginData.userColor)
 
         window.location.pathname = "/";
       }

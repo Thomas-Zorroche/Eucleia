@@ -80,7 +80,7 @@ export const BarChart = ({ width, height, dataX, dataY }) => {
               y={yScale(value)}
               height={innerHeight - yScale(value)}
               bandwidth={xScale.bandwidth()}
-              color={localStorage.getItem("userColor")}
+              color={sessionStorage.getItem("userColor")}
             />
           )}
 
