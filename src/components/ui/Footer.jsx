@@ -48,7 +48,7 @@ export const Footer = ({ onDateFilterChange, onUserFilterChange, usersDatas }) =
   }
 
   return (
-    <div id="Footer">
+    <div id="Footer" style={{display: JSON.parse(sessionStorage.getItem("isLogin")) || false ? "flex" : "none"}}>
       <SpinBox type={ESpinBoxType.MONTH} onValueChange={onSpinBoxValueChange} />
 
       <select name="date_option"  onClick={(e) => updateDateFilter(e)}>

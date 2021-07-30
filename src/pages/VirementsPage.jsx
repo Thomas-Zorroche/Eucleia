@@ -15,9 +15,7 @@ export const VirementPage = ({ usersDatas, dateFilter }) => {
     const form = new FormData();
     form.append("dateFilterType", dateFilter.type);
     form.append("dateFilterValue", dateFilter.value + 1);
-
     form.append("userCount", usersDatas.length)
-
     usersDatas.map((user, i) => {
       form.append("user_" + i, user.pseudo);
       form.append("userFilter_" + i, user.userFilter);

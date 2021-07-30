@@ -22,7 +22,7 @@ export const Main = ({ usersDatas, dateFilter }) => {
 
       <ProtectedRoute exact path='/addTransfer' component={AddTransferPage}></ProtectedRoute>
 
-      <ProtectedRoute exact path='/graphiques' component={GraphiquePage}></ProtectedRoute>
+      <ProtectedRoute exact path='/graphiques' usersDatas={usersDatas} dateFilter={dateFilter} component={GraphiquePage}></ProtectedRoute>
 
       <ProtectedRoute exact path='/user' component={UserPage}></ProtectedRoute>
 

@@ -19,7 +19,7 @@ export const Bar = ({ value, x, y, height, bandwidth, color }) => {
         y={y - 30}
         width={bandwidth} 
         height={30} 
-        fill= { dispalyValue ? "#222222" : "#00000000"}
+        fill= { dispalyValue ? "#555555" : "#00000000"}
       />
 
       <text 

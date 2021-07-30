@@ -309,8 +309,10 @@ h1 {
   right: 0;
   width: 88%;
   height: 8vh;
-  background-color: rgb(14, 14, 14);
-  border-top: solid rgb(109, 109, 109);
+  background-color: var(--greyDark);
+  
+  border-left: solid rgb(70, 70, 70);
+  box-sizing: border-box;
 
   display: flex;
   justify-content: space-around;
