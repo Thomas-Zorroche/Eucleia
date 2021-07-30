@@ -221,6 +221,14 @@ h1 {
 .transferPerso {
   font-size: 22px;
 }
+.transfer-hover {
+  margin: 40px;
+  width: 50vw;
+  min-width: 50vw;
+}
+.transfer-hover div {
+  width: 100%;
+}
 
 /* FORM ADD TRANSFERT */
 #inputTransferCount {

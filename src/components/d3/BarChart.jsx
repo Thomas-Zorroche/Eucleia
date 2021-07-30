@@ -16,7 +16,7 @@ const getMaxValue = (data) => {
 } 
 
 // Bar Chart Object
-export const BarChart = ({ width, height, dataX, dataY, backgroundColor }) => {
+export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTransferHover }) => {
   const [yValues, setYValues] = useState(dataY);
   const [maxValueY, setMaxYValue] = useState(getMaxValue(dataY));
   const [xValues, setXValues] = useState(dataX) 
@@ -33,7 +33,6 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor }) => {
     .domain([0, maxValueY])
     .range([innerHeight, 0]);
 
-
   useEffect(() => {
     setYValues(dataY)
     setMaxYValue(getMaxValue(dataY.map(d => d.value)))
@@ -43,11 +42,17 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor }) => {
     setXValues(dataX)
   }, [dataX])
 
+  const onBarHover = (hover, index) => {
+    onTransferHover(hover, index);
+  }
+
   return (
     <div>
       <svg height={height} width={width}>
         <rect width="100%" height="100%" fill={backgroundColor} rx="15" ry="15" />      
         <g transform={`translate(${margin.left}, ${margin.top})`}>
+
+          {dataX.length === 0 && <text fill="white" x={(width/2) - 150} y={(height/2) - 100} >NO DATA</text>}
 
           {yScale.ticks().map((tickValue) => 
             <g key={tickValue}>
@@ -87,17 +92,17 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor }) => {
             return (
               <Bar 
                 key={index}
+                index={index}
                 value={data.value}
                 x = {x}
                 y={yScale(data.value)}
                 height={innerHeight - yScale(data.value)}
                 bandwidth={bandwidth}
                 color={data.color}
+                onHover={onBarHover}
               />
             )
           })}
-
-
 
         </g>
       </svg>

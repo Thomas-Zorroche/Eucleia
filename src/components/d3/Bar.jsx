@@ -1,12 +1,23 @@
 import { React, useState } from "react";
 
-export const Bar = ({ value, x, y, height, bandwidth, color }) => {
+export const Bar = ({ value, x, y, height, bandwidth, color, onHover, index }) => {
 
-  const [dispalyValue, setDisplayValue] = useState(false);
+  const [dispalyValue, setDisplayValue] = useState(false); 
+
+  const onMouseEnter = () => {
+    setDisplayValue(true)
+    onHover(true, index)
+  }
+
+  const onMouseLeave = () => {
+    setDisplayValue(false)
+    onHover(false, index)
+
+  }
 
   return (
     <>
-      <rect onMouseEnter={() => setDisplayValue(true)} onMouseLeave={() => setDisplayValue(false)}
+      <rect onMouseEnter={() => onMouseEnter()} onMouseLeave={() => onMouseLeave()}
         x={x} 
         y={y} 
         width={bandwidth} 
@@ -19,7 +30,7 @@ export const Bar = ({ value, x, y, height, bandwidth, color }) => {
         y={y - 30}
         width={bandwidth} 
         height={30} 
-        fill= { dispalyValue ? "#555555" : "#00000000"}
+        fill= { dispalyValue ? "#555555" : "#00000000" }
       />
 
       <text 

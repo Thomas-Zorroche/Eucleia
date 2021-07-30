@@ -3,6 +3,7 @@ import { BarChart } from '../components/d3/BarChart';
 
 import { getColorFromTransfer, getMainColorFromPseudo } from '../common/common';
 import { getColorVariants } from '../common/colors';
+import { Transfer } from '../components/ui/Transfer';
 
 
 const sortByDates = (data) => {
@@ -16,6 +17,8 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
   const [dataX, setDataX] = useState([]);
   // Contains transfer
   const [dataY, setDataY] = useState([]);
+  // Transfer on Hover
+  const [transferHover, setTransferHover] = useState();
   
   async function loadData()
   {
@@ -43,9 +46,10 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
   
       setDataX(transfers.map(t => t.date));
 
-      setDataY(transfers.map(t => {
-        return {value: parseInt(t.value), color: /*getColorFromTransfer(t, usersDatas)*/ getMainColorFromPseudo(t.user, usersDatas), comment: t.comment }
+      setDataY(transfers.map(transfer => {
+        return ({...transfer, color: getMainColorFromPseudo(transfer.user, usersDatas)});
       }));
+      
     })
   }
 
@@ -54,22 +58,28 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
       loadData();
   }, [dateFilter, usersDatas])
 
+  const onTransferHover = (hover, index) => {
+    setTransferHover(hover ? dataY[index] : "")
+  }
+
 
   return (
     <div id="Page">
+        
         <h1>Graphiques - {dataY.length}</h1>
 
+        <div className="transfer-hover">
+          <Transfer transfer={transferHover} usersDatas={usersDatas} />
+        </div>
+        
         <BarChart
           width={1500}
           height={750} 
           dataX={dataX} 
           dataY={dataY}
           backgroundColor={getColorVariants(sessionStorage.getItem("userColor")).colorDark}
+          onTransferHover={onTransferHover}
         />
-
-        {/* {dataY.map((transfer, i) => {
-          return <p>{dataX[i]} --- {transfer.value} </p>
-        })} */}
 
     </div>
   )

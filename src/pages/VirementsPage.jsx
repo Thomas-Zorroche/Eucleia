@@ -56,8 +56,8 @@ export const VirementPage = ({ usersDatas, dateFilter }) => {
           <p style={{flexGrow:4}}>Commentaire</p>
           <p>Value</p>
         </div>
-        {transfers && transfers.map((t, i) => // TODO pass directly t
-          <Transfer key={t.id} index={i} perso={t.perso} secret={t.secret} pseudo={t.user} type={t.type} value={t.value} date={t.date} comment={t.comment} usersDatas={usersDatas} />
+        {transfers && transfers.map((t, i) =>
+          <Transfer key={t.id} transfer={t} usersDatas={usersDatas} />
         )}
       </div>
 
