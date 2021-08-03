@@ -37,7 +37,10 @@ function App() {
       const usersDatasRaw = await queryDatabase("usersDatas"); // only pseudo and main color
 
       const usersDatasPrepare = usersDatasRaw.map(user => {
-        return { pseudo: user.pseudo, colors: getColorVariants(user.color), userFilter: EFilterUser.PERSO }
+        return { 
+          pseudo: user.pseudo, 
+          colors: getColorVariants(user.color), 
+          userFilter: sessionStorage.getItem("userConnected") === user.pseudo ?  EFilterUser.ALL : EFilterUser.NONE }
       })
       setUsersDatas(usersDatasPrepare)
     }
@@ -58,7 +61,6 @@ function App() {
         return user;
     }))
   }
-
 
   return (
     <div className="App">

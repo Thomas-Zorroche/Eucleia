@@ -8,7 +8,7 @@ export const EFilterUser = {
   ALL:    "All"     // perso + commun
 }
 
-export const FilterUserCircle = ({ pseudo, colors, onUserFilterChange, index }) => {
+export const FilterUserCircle = ({ pseudo, colors, filterInit, onUserFilterChange, index }) => {
 
   const letter = pseudo.substring(0, 1).toUpperCase();
 
@@ -48,7 +48,7 @@ export const FilterUserCircle = ({ pseudo, colors, onUserFilterChange, index }) 
   }, [filter, colors])
 
   useEffect(() => {
-    setFilter(EFilterUser.PERSO)
+    setFilter(filterInit)
   }, [])
 
   return (

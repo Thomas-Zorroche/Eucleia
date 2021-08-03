@@ -64,7 +64,7 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
   }, [dateFilter, usersDatas])
 
   const onTransferHover = (hover, index) => {
-    setTransferHover(hover ? dataY[index] : "")
+    setTransferHover(hover ? dataY[index] : null)
   }
 
   return (
@@ -85,6 +85,10 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
           onTransferHover={onTransferHover}
           dateFilter={dateFilter}
         />
+        
+        {/* <input type="range" name="range-1a" id="range-1a" min="0" max="12" defaultValue="0" data-popup-enabled="true" data-show-value="true" />
+        <input type="range" name="range-1a" id="range-1a" min="0" max="12" defaultValue="0" data-popup-enabled="true" data-show-value="true" />     */}
+
 
     </div>
   )

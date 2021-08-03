@@ -83,7 +83,7 @@ export const Transfer = ({ transfer, usersDatas}) => {
       >
         <p className="transferUser" >{(transfer && transfer.user) || "Pseudo"}</p>
 
-        <p className="transferPerso">{(transfer && transfer.perso === "1" ? "o" : "n") || "o" }</p>
+        <p className="transferPerso">{(transfer && (transfer.perso === "1" ? "Perso" : "Commun")) || "" }</p>
 
         <p className="transferDate">{(transfer && transfer.date) || "date"}</p>
 

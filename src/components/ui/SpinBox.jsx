@@ -1,3 +1,4 @@
+import { render } from '@testing-library/react';
 import { index } from 'd3';
 import { React, useEffect, useState } from 'react';
 import '../../style/component.css';
@@ -11,8 +12,9 @@ export const ESpinBoxType = {
   YEAR: "Year"
 }
 
-export const SpinBox = ({ type, onValueChange }) => {
 
+export const SpinBox = ({ type, onValueChange }) => {
+  
   // Value
   const [value, setValue] = useState(0)
   // Display String of value
@@ -26,8 +28,8 @@ export const SpinBox = ({ type, onValueChange }) => {
       const date = new Date();
       const currentIndexMonth = date.getMonth();
 
-      setValue(currentIndexMonth);
-      setStringValue(months[currentIndexMonth] + " 2021");
+      setValue(currentIndexMonth - 1);
+      setStringValue(months[currentIndexMonth - 1] + " 2021");
       setYearOfMonth(date.getFullYear())
     }
     else if (type === ESpinBoxType.YEAR)

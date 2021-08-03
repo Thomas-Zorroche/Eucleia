@@ -13,8 +13,6 @@ export const EDateFilter = {
 
 export const Footer = ({ onDateFilterChange, onUserFilterChange, usersDatas }) => {
 
-  //const userColors = getArrayOfUserColors(usersDatas);
-
   const [dateFilter, setDateFilter] = useState({type: EDateFilter.MONTH, value:""})
 
   const updateDateFilter = (e) => {
@@ -49,7 +47,7 @@ export const Footer = ({ onDateFilterChange, onUserFilterChange, usersDatas }) =
       </select>
 
       {usersDatas.map((user, index) => {
-        return <FilterUserCircle index={index} pseudo={user.pseudo} colors={user.colors} onUserFilterChange={onFilterUserCircleChange}/>
+        return <FilterUserCircle index={index} pseudo={user.pseudo} filterInit={user.userFilter} colors={user.colors} onUserFilterChange={onFilterUserCircleChange}/>
       })}
 
     </div>
