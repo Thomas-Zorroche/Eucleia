@@ -87,7 +87,7 @@ export const Transfer = ({ transfer, usersDatas}) => {
 
         <p className="transferDate">{(transfer && transfer.date) || "date"}</p>
 
-        <p className="transferType" style={{backgroundColor: transfer.color}}>{(transfer && transfer.type) || "type"}</p>
+        <p className="transferType" style={{backgroundColor: transfer ? transfer.color : "" }}>{(transfer && transfer.type) || "type"}</p>
 
         <p className="transferComment" style={{flexGrow:4}}>{(transfer && transfer.comment) || "commentaires"}</p>
 

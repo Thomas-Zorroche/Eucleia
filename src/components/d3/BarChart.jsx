@@ -17,12 +17,13 @@ const getMaxValue = (data) => {
 } 
 
 // Bar Chart Object
-export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTransferHover, dateFilter }) => {
+export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTransferHover, dateFilter, colorizeType }) => {
   const [yValues, setYValues] = useState(dataY);
   const [maxValueY, setMaxYValue] = useState(getMaxValue(dataY));
   const [xValues, setXValues] = useState(dataX) 
 
   const [domainX, setDomainX] = useState([])
+  const [colorizeByType, setColorizeByType] = useState(false)
 
   const innerHeight = height - margin.bottom - margin.top;
   const innerWidth = width - margin.left - margin.right;
@@ -61,6 +62,10 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTrans
     }
     
   }, [dateFilter])
+
+  useEffect(() => {
+    setColorizeByType(colorizeType);
+  }, [colorizeType])
   
   const onBarHover = (hover, index) => {
     onTransferHover(hover, index);
@@ -121,7 +126,7 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTrans
                 y={yScale(data.value)}
                 height={innerHeight - yScale(data.value)}
                 bandwidth={bandwidth}
-                color={data.color}
+                color={colorizeByType ? data.color : data.userColor}
                 onHover={onBarHover}
               />
             )

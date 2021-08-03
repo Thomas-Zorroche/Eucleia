@@ -20,6 +20,8 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
   const [dataY, setDataY] = useState([]);
   // Transfer on Hover
   const [transferHover, setTransferHover] = useState();
+  // Transfer background color are type color
+  const [colorizeType, setColorizeType] = useState(false)
   
   async function loadData()
   {
@@ -52,7 +54,7 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
       setDataX(transfers.map(transfer => getMonthNameFromDate(transfer.date)));
 
       setDataY(transfers.map(transfer => {
-        return ({...transfer, color: getMainColorFromPseudo(transfer.user, usersDatas)});
+        return ({...transfer, userColor: getMainColorFromPseudo(transfer.user, usersDatas)});
       }));
       
     })
@@ -65,6 +67,10 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
 
   const onTransferHover = (hover, index) => {
     setTransferHover(hover ? dataY[index] : null)
+  }
+
+  const onColorizeTypeChanged = (e) => {
+    setColorizeType(colorizeType ? false : true);
   }
 
   return (
@@ -84,8 +90,14 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
           backgroundColor={getColorVariants(sessionStorage.getItem("userColor")).colorDark}
           onTransferHover={onTransferHover}
           dateFilter={dateFilter}
+          colorizeType={colorizeType}
         />
         
+        <div>
+          <span>Colorize by types</span>
+          <input type="checkbox" onChange={(e) => onColorizeTypeChanged(e)}/>
+        </div>
+
         {/* <input type="range" name="range-1a" id="range-1a" min="0" max="12" defaultValue="0" data-popup-enabled="true" data-show-value="true" />
         <input type="range" name="range-1a" id="range-1a" min="0" max="12" defaultValue="0" data-popup-enabled="true" data-show-value="true" />     */}
 
