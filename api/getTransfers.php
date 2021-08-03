@@ -39,7 +39,7 @@ if (isset($_POST["year"]) && isset($_POST["userCount"]))
       $params["perso"] = ($userFilter == "Perso") ? 1 : 0;
 
     // Base Query
-    $baseQuery = "SELECT transfer.value, transfer.date, transfer.comment, transfer.perso, transfer.secret, transfer.id, user.pseudo, type.label
+    $baseQuery = "SELECT transfer.value, transfer.date, transfer.comment, transfer.perso, transfer.secret, transfer.id, user.pseudo, type.label, type.color
                   FROM transfer
                   INNER JOIN type ON type.id_type = transfer.id_type 
                   INNER JOIN user ON user.id_user = transfer.id_user";
@@ -81,7 +81,8 @@ if (isset($_POST["year"]) && isset($_POST["userCount"]))
         "date" => $resultats['date'],
         "perso" => $resultats['perso'],
         "secret" => $resultats['secret'],
-        "comment" => $resultats['comment']
+        "comment" => $resultats['comment'],
+        "color" => $resultats['color']
       );
       array_push($transfers, $transfer);
     }

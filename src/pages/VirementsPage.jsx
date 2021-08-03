@@ -40,6 +40,8 @@ export const VirementPage = ({ usersDatas, dateFilter }) => {
       loadData();
   }, [dateFilter, usersDatas])
 
+  console.log(transfers)
+
 
   return (
     <div id="Page">
