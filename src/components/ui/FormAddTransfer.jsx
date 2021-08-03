@@ -16,7 +16,7 @@ export const FormAddTransfer = ({ index, dateOption }) => {
     <div className="formAddTransfer">
       <div>
         {dateOption === EDateOption.Date ? 
-          <input type="date" name={"date_" + index}  min="2020-01-01" max="2021-12-31" required></input> 
+          <input type="date" name={"date_" + index}  min="2020-01-01" max="2022-12-31" required></input> 
           : <input type="number" name={"date_" + index} min="1" max="31" required /> 
         }
       </div>

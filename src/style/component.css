@@ -329,8 +329,8 @@ h1 {
 
 /* SPINBOX */
 .spinBox-container {
-  width: 250px; 
-  max-width: 250px; 
+  width: 400px; 
+  max-width: 400px; 
   display: flex;
   flex-direction:row;
   justify-content: space-between;

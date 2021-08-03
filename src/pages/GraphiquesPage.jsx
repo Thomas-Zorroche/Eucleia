@@ -1,9 +1,10 @@
 import { React, useState, useEffect } from 'react';
 import { BarChart } from '../components/d3/BarChart';
 
-import { getColorFromTransfer, getMainColorFromPseudo } from '../common/common';
+import { getColorFromTransfer, getMainColorFromPseudo, getMonthNameFromDate } from '../common/common';
 import { getColorVariants } from '../common/colors';
 import { Transfer } from '../components/ui/Transfer';
+import { EDateFilter } from '../components/ui/Footer';
 
 
 const sortByDates = (data) => {
@@ -23,8 +24,11 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
   async function loadData()
   {
     const form = new FormData();
-    form.append("dateFilterType", dateFilter.type);
-    form.append("dateFilterValue", dateFilter.value + 1);
+    
+    form.append("year", dateFilter.value.substring(0, 4));
+    if (dateFilter.type === EDateFilter.MONTH)
+      form.append("month", dateFilter.value.substring(5, 7));
+
     form.append("userCount", usersDatas.length)
     usersDatas.map((user, i) => {
       form.append("user_" + i, user.pseudo);
@@ -41,10 +45,11 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
     .then( transfers => {
       if (!transfers || !Array.isArray(transfers))
         return;
-      
-      sortByDates(transfers);
-  
-      setDataX(transfers.map(t => t.date));
+
+      if (dateFilter.type === EDateFilter.MONTH)
+        setDataX(transfers.map(transfer => transfer.date));
+      else
+      setDataX(transfers.map(transfer => getMonthNameFromDate(transfer.date)));
 
       setDataY(transfers.map(transfer => {
         return ({...transfer, color: getMainColorFromPseudo(transfer.user, usersDatas)});
@@ -62,7 +67,6 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
     setTransferHover(hover ? dataY[index] : "")
   }
 
-
   return (
     <div id="Page">
         
@@ -79,6 +83,7 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
           dataY={dataY}
           backgroundColor={getColorVariants(sessionStorage.getItem("userColor")).colorDark}
           onTransferHover={onTransferHover}
+          dateFilter={dateFilter}
         />
 
     </div>

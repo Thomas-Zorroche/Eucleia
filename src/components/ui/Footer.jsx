@@ -11,14 +11,6 @@ export const EDateFilter = {
   WEEK: "Week"
 }
 
-// const getArrayOfUserColors = (usersDatas) => {
-//   const users = []
-//   for (const [key, value] of usersDatas.entries())
-//     users.push({pseudo: key, colors: value})
-  
-//   return users;
-// }
-
 export const Footer = ({ onDateFilterChange, onUserFilterChange, usersDatas }) => {
 
   //const userColors = getArrayOfUserColors(usersDatas);
@@ -49,11 +41,11 @@ export const Footer = ({ onDateFilterChange, onUserFilterChange, usersDatas }) =
 
   return (
     <div id="Footer" style={{display: JSON.parse(sessionStorage.getItem("isLogin")) || false ? "flex" : "none"}}>
-      <SpinBox type={ESpinBoxType.MONTH} onValueChange={onSpinBoxValueChange} />
+      <SpinBox type={dateFilter.type} onValueChange={onSpinBoxValueChange} />
 
       <select name="date_option"  onClick={(e) => updateDateFilter(e)}>
-              <option value="Year">Année</option>
               <option value="Month">Mois</option>
+              <option value="Year">Année</option>
       </select>
 
       {usersDatas.map((user, index) => {

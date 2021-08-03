@@ -2,7 +2,8 @@ import { React, useState, useEffect } from "react";
 import { csvParse, scaleBand, scaleLinear } from 'd3';
 
 import { Bar } from './Bar';
-import { getOccurencesInArray } from "../../common/common";
+import { getOccurencesInArray, monthNames } from "../../common/common";
+import { EDateFilter } from "../ui/Footer";
 
 /* CONSTANTS PARAMETERS */
 const margin = { top:50, right:40, bottom:50, left:70 };
@@ -16,16 +17,18 @@ const getMaxValue = (data) => {
 } 
 
 // Bar Chart Object
-export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTransferHover }) => {
+export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTransferHover, dateFilter }) => {
   const [yValues, setYValues] = useState(dataY);
   const [maxValueY, setMaxYValue] = useState(getMaxValue(dataY));
   const [xValues, setXValues] = useState(dataX) 
+
+  const [domainX, setDomainX] = useState([])
 
   const innerHeight = height - margin.bottom - margin.top;
   const innerWidth = width - margin.left - margin.right;
 
   const xScale = scaleBand()
-    .domain(xValues)
+    .domain(domainX)
     .range([0, innerWidth])
     .paddingInner(innerPadding);
 
@@ -42,6 +45,23 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTrans
     setXValues(dataX)
   }, [dataX])
 
+  useEffect(() => {
+    if (dateFilter.type === EDateFilter.MONTH)
+    {
+      setDomainX(Array(31).fill().map((d, i) => {
+        return (i + 1) < 10 ? dateFilter.value + "-0" + (i + 1) : dateFilter.value + "-" + (i + 1)
+      }))
+    }
+    else if (dateFilter.type === EDateFilter.YEAR)
+    {
+      setDomainX(monthNames)
+    }
+    else {
+      console.error("Invalid date filter.")
+    }
+    
+  }, [dateFilter])
+  
   const onBarHover = (hover, index) => {
     onTransferHover(hover, index);
   }
@@ -75,19 +95,22 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTrans
                 fontSize="15" 
                 fill="white"
                 style={{ textAnchor: 'middle'}}>
-                {tickValue}
+                {dateFilter.type === EDateFilter.MONTH ? tickValue.substring(8, 10) : tickValue}
               </text>
           )}
 
           {yValues.map((data, index) => {
+            if (!xScale(xValues[index]))
+              return "";
+
+
             // We count occurences of the same date in order to display transfer correctly
             // {count: , index: }
             const dateOccurences = getOccurencesInArray(index, xValues)
             if (dateOccurences.count === 0) return 0;
             
             const bandwidth = xScale.bandwidth() / dateOccurences.count;
-            // xValues[index] == YYYY-MM-DD
-            const x = dateOccurences === 1 ? xScale(xValues[index]) : xScale(xValues[index]) + (dateOccurences.index * (1.1 * bandwidth))
+            const x = dateOccurences.count === 1 ? xScale(xValues[index]) : xScale(xValues[index]) + (dateOccurences.index * (1.1 * bandwidth))
             
             return (
               <Bar 

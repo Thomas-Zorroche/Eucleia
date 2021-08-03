@@ -5,16 +5,21 @@ header('Access-Control-Allow-Headers: Content-Type');
 // Connection file to the database
 include("db_connect.php");
 
-if (isset($_POST["dateFilterType"]) && isset($_POST["dateFilterValue"]) && isset($_POST["userCount"]))
+
+
+if (isset($_POST["year"]) && isset($_POST["userCount"]))
 {
-  $dateFilterType = $_POST["dateFilterType"];
-  $dateFilterValue = $_POST["dateFilterValue"];
   $userCount = $_POST["userCount"];
 
-
+  // Commun Parameters
+  $params = array();
+  $params["yearValue"] = $_POST["year"];
+  if (isset($_POST["month"]))
+    $params["monthValue"] = $_POST["month"];
+  
   // Array to return
   $transfers = array();
-
+  
   // iterate through users
   for ($i = 0; $i < $userCount; $i++)
   {
@@ -23,49 +28,49 @@ if (isset($_POST["dateFilterType"]) && isset($_POST["dateFilterValue"]) && isset
       echo json_encode("Invalid users datas");
       return;
     }
-
-    $pseudo = $_POST["user_" . $i];
-    $userFilter = $_POST["userFilter_" . $i];
-
+    
+    $userFilter = $_POST["userFilter_" . $i]; // None, Perso, Common, All
     if ($userFilter == "None")
-    {
       continue;
-    }
-    else if ($userFilter == "Perso" || $userFilter == "Common")
-    {
-      $query = $bdd->prepare(
-        'SELECT transfer.value, transfer.date, transfer.comment, transfer.perso, transfer.secret, transfer.id, user.pseudo, type.label
-          FROM transfer
-          INNER JOIN type ON type.id_type = transfer.id_type 
-          INNER JOIN user ON user.id_user = transfer.id_user
-          WHERE MONTH(transfer.date) = :monthValue AND user.pseudo = :pseudo AND transfer.perso = :perso');
-      $query->execute(array(
-        'monthValue' => $dateFilterValue,
-        'pseudo' => $pseudo, 
-        'perso' => $userFilter == "Perso" ? 1 : 0)
-      );
-    }
+      
+    // User Params
+    $params["pseudo"] = $_POST["user_" . $i];
+    if ($userFilter != "All")
+      $params["perso"] = ($userFilter == "Perso") ? 1 : 0;
+
+    // Base Query
+    $baseQuery = "SELECT transfer.value, transfer.date, transfer.comment, transfer.perso, transfer.secret, transfer.id, user.pseudo, type.label
+                  FROM transfer
+                  INNER JOIN type ON type.id_type = transfer.id_type 
+                  INNER JOIN user ON user.id_user = transfer.id_user";
+    
+    // Query String Parameters 
+    $queryParamPerso = " AND transfer.perso = :perso";
+    $queryParamMonth = " AND MONTH(transfer.date) = :monthValue";
+    $queryParamYear  = " AND YEAR(transfer.date) = :yearValue";
+
+    // Build Where Clause
+    $whereClause = " WHERE user.pseudo = :pseudo";
+
+    if (array_key_exists("monthValue", $params))
+      $whereClause .=  $queryParamMonth;
+
+    if ($userFilter == "Perso")
+      $baseQuery .= $queryParamYear . $queryParamPerso;
+
+    else if ($userFilter == "Common")
+      $baseQuery .= $queryParamYear . $queryParamPerso;
+
     else if ($userFilter == "All")
-    {
-      $query = $bdd->prepare(
-        'SELECT transfer.value, transfer.date, transfer.comment, transfer.perso, transfer.secret, transfer.id, user.pseudo, type.label
-          FROM transfer
-          INNER JOIN type ON type.id_type = transfer.id_type 
-          INNER JOIN user ON user.id_user = transfer.id_user
-          WHERE MONTH(transfer.date) = :monthValue AND user.pseudo = :pseudo');
-      $query->execute(array(
-        'monthValue' => $dateFilterValue,
-        'pseudo' => $pseudo)
-      );
-    }
+      $baseQuery .= $queryParamYear;
     else
     {
       echo json_encode("Invalid user filter.");
       return;
     }
 
-
-
+    $query = $bdd->prepare($baseQuery . $whereClause);
+    $query->execute($params);
     while($resultats = $query->fetch())
     {
       $transfer = array(
@@ -81,9 +86,14 @@ if (isset($_POST["dateFilterType"]) && isset($_POST["dateFilterValue"]) && isset
       array_push($transfers, $transfer);
     }
 
-  }
-  
+    // Clear user params key for the next user
+    unset($params["pseudo"]);
+    unset($params["perso"]);
 
+
+  } // End For Loop
+
+  // Return results
 	echo json_encode($transfers);
 
 }

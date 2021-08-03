@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 import { Transfer } from '../components/ui/Transfer';
 import { BaseButton } from '../components/ui/BaseButton';
-
+import { EDateFilter } from '../components/ui/Footer';
 
 
 export const VirementPage = ({ usersDatas, dateFilter }) => {
@@ -13,8 +13,10 @@ export const VirementPage = ({ usersDatas, dateFilter }) => {
   async function loadData() {
 
     const form = new FormData();
-    form.append("dateFilterType", dateFilter.type);
-    form.append("dateFilterValue", dateFilter.value + 1);
+    form.append("year", dateFilter.value.substring(0, 4));
+    if (dateFilter.type === EDateFilter.MONTH)
+      form.append("month", dateFilter.value.substring(5, 7));
+
     form.append("userCount", usersDatas.length)
     usersDatas.map((user, i) => {
       form.append("user_" + i, user.pseudo);
