@@ -8,6 +8,8 @@ import { VirementPage } from '../pages/VirementsPage';
 import { GraphiquePage } from '../pages/GraphiquesPage';
 import { AddTransferPage } from '../pages/AddTransferPage';
 import { UserPage } from '../pages/UserPage';
+import { OptionPage } from '../pages/OptionPage';
+
 
 export const Main = ({ usersDatas, dateFilter }) => {
 
@@ -26,6 +28,7 @@ export const Main = ({ usersDatas, dateFilter }) => {
 
       <ProtectedRoute exact path='/user' component={UserPage}></ProtectedRoute>
 
+      <ProtectedRoute exact path='/option' component={OptionPage}></ProtectedRoute>
       
     </Switch>
   );

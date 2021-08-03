@@ -1,7 +1,7 @@
-import { local, pointer } from 'd3'
 import { React, useState, useEffect } from 'react'
 import { HeaderValueViewer } from './HeaderValueViewer'
 import { Link } from "react-router-dom"
+
 
 const getFirstLetter = (string) => {
   if (!string || string.length === 0) 
@@ -9,7 +9,6 @@ const getFirstLetter = (string) => {
 
   return string.substring(0, 1).toUpperCase();
 } 
-
 
 export const HeaderBar = () => {
 
@@ -36,13 +35,18 @@ export const HeaderBar = () => {
 
 
       <div id="HeaderRight">
+        <div className='header-link'>
+          <Link to="/option"><p>Options</p></Link>
+        </div>
+
         <Link to="/user">
           <p className="pseudoCircle" style={{backgroundColor: sessionStorage.getItem("userColor")}}>{getFirstLetter(sessionStorage.getItem("userConnected"))}</p>
         </Link>
 
-        <p className='logout' onClick={() => logOut()}>Log Out</p>
+        <div className='header-link'>
+          <p onClick={() => logOut()}>Log Out</p>
+        </div>
       </div>
-
       
     </div>
   )
