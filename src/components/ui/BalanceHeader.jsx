@@ -44,21 +44,21 @@ export const BalanceHeader = ({ dateFilter }) => {
     <div className="balanceHeader">
       <div>
         <p className="label-balanceHeader">Sorties</p>
-        <p style={{color: "red", fontWeight: '900'}}>{expanses && expanses.toFixed(2)}€</p>
+        <p style={{color: "var(--red)", fontWeight: '900'}}>{expanses && expanses.toFixed(2)}€</p>
       </div>
 
       <div style={{color: "black"}}>|</div>
       
       <div>
         <p className="label-balanceHeader">Entrées</p>
-        <p style={{color: "green", fontWeight: '900'}}>+{incomes && incomes.toFixed(2)}€</p>
+        <p style={{color: "var(--green)", fontWeight: '900'}}>+{incomes && incomes.toFixed(2)}€</p>
       </div>
 
       <div style={{color: "black"}}>|</div>
 
       <div>
         <p className="label-balanceHeader">Balance</p>
-        <p style={{color: "orange", fontWeight: '900'}}>{balance && balance > 0 ? "+" + balance.toFixed(2): balance.toFixed(2)}€</p>
+        <p style={{color: "var(--blueLight)", fontWeight: '900'}}>{balance && balance > 0 ? "+" + balance.toFixed(2): balance.toFixed(2)}€</p>
       </div>
     </div>
   )

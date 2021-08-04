@@ -10,10 +10,17 @@
 
 /* Colors */
 :root {
-  --grey: rgb(42, 45, 49);
-  --greyDark: rgb(27, 29, 32);
-  --green: rgb(32, 233, 126);
+  --blueTypo: #8186AF;
+  --blueBody: #22203d;      
+  --blueBackground: #151431;  
+  --blueLight: #43FCFF;
+
+  --red: #e2442f;
+  --redLight: #e07162;
+
+  --green: #2fe23e;
 }
+
 
 
 /* Fonts */

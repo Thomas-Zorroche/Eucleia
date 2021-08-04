@@ -1,7 +1,7 @@
 .App {
-  font-family: 'Ubuntu';
+  font-family: 'Montserrat';
 
-  background-color: var(--grey);
+  background-color: var(--blueBackground);
   min-height: 100vh;
 
   display: flex;

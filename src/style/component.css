@@ -9,21 +9,22 @@
 
 /* PAGE */
 #Page {
-  width: 88%;
+  width: 100%;
+  right: 0;
+
   padding-top: 100px;
-  padding-left: 200px;
   padding-bottom: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-h1 {
 
+  background-color: var(--blueBackground);
 }
+
 
 /* BUTTONS */
 .baseButton {
-  background-color: rgb(0, 195, 255);
+  background-color: var(--red);
   font-size: 22px;
   color: white;
   font-family: 'Ubuntu';
@@ -34,57 +35,42 @@ h1 {
   cursor: pointer;
 }
 .baseButton:hover {
-  background-color: rgb(58, 209, 255);
+  background-color: var(--redLight);
 }
 .baseButton:active {
-  background-color: rgb(0, 195, 255);
+  background-color: var(--red);
 }
 
-/* Header Bar */
-#HeaderBar
-{
+/* SVG */
+/* https://codepen.io/sosuke/pen/Pjoqqp */
+.icon {
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(159deg) brightness(98%) contrast(107%);
+}
+.iconScaled:hover {
+  transform: scale(1.2);
+  transition: all .3s ease-in-out;
+  filter: invert(42%) sepia(89%) saturate(3549%) hue-rotate(342deg) brightness(90%) contrast(96%);
+}
+
+
+/* Header Balance */
+.balanceHeader {
   z-index: 10;
   position: fixed;
-  top:0;
-  left: 0;
-
-  width: 100%;
-  height: 6vh;
-  background-color: rgb(15, 15, 15);
-  filter: drop-shadow(0 0 0.5rem rgb(0, 0, 0));
-
-  display: flex;
-  justify-content: space-between;
-
-}
-#HeaderLeft {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-#HeaderRight {
-  display: flex;
-  justify-content: space-around;
-  align-self: center;
-  width: 30%;
-}
-
-#HeaderBar h1 {
-  margin: 0px 50px 0px 50px;
-  font-size: 1.5em;
-}
-
-.balanceHeader {
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  border-radius: 20px;
-  padding: 2px 10px 2px 10px;
+  background-color: var(--blueBody);
+  border-radius: 0px 0px 20px 20px;
+  padding: 10px 15px 10px 15px;
+
+  filter: drop-shadow(0 0 0.4rem rgb(0, 0, 0));
+
 }
 .balanceHeader div {
   margin: 0 10px 0 10px;
-  font-size: 20px;
+  font-size: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,15 +80,82 @@ h1 {
   margin: 0;
 }
 .label-balanceHeader {
-  color: black;
-  font-size: 10px;
+  color: white;
+  font-size: 12px;
 }
 
-.header-link {
-  cursor: pointer;
+
+/* MenuBar */
+#MenuBar {
+  z-index: 10;
+  position: fixed;
+  padding-top: 0px;
+  width: 15%;
+  height: 100vh;
+  background-color: var(--blueBody);
+  filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+#MenuBar ul a {
+  width: 100%;
+}
+#MenuBar ul {
+  height: 25%;
+  width: 80%;
+  list-style-type: none;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+
   font-size: 0.8em;
+  font-variant: small-caps;
+}
+#Logo {
+  width: 75%;
+  text-align: center;
+  padding-bottom: 15px;
+  font-size: 1.5em;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--red);
+}
+.menuButton {
+  cursor: pointer;
+  color: var(--blueTypo);
   display: flex;
   align-items: center;
+  margin-bottom: 0px;
+  padding: 5px 0 5px 20px;
+
+}
+.menuButton:hover {
+  color: var(--red);
+}
+.menuButton img {
+  margin-right: 20px;
+}
+.menuButtonActive {
+  color: white;
+  background-color: var(--red);
+  border-radius: 25px;
+}
+.menuButtonActive:hover {
+  color: white;
+}
+
+#Footer-Menu {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid var(--blueTypo);
 }
 .pseudoCircle {
   width: 50px;
@@ -112,53 +165,6 @@ h1 {
   text-align: center;
 }
 
-
-/* MenuBar */
-#MenuBar {
-  position: fixed;
-  padding-top: 100px;
-  width: 12%;
-  height: 100vh;
-  background-color: var(--greyDark);
-  filter: drop-shadow(0 0 0.5rem rgb(0, 0, 0));
-}
-#MenuBar a {
-  width: 100%;
-}
-#MenuBar ul {
-  width: 100%;
-  list-style-type: none;
-  padding: 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-
-  font-size: 0.8em;
-}
-
-#MenuBar li {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 20px 0px 20px 50px;
-  cursor: pointer;
-}
-
-.menuButton {
-  color: rgba(222, 229, 235, 0.863);
-}
-.menuButton:hover {
-  color: rgb(255, 255, 255);
-}
-
-.menuButtonActive {
-  border-left: 3px solid;
-  border-right: 3px solid;
-  border-color: rgb(0, 195, 255);
-  background: linear-gradient(0deg, rgba(57, 181, 206, 0.05) 0%, rgba(57, 181, 206, 0.541) 100%); 
-}
-
 /* TRANFSERS 
 --------------------------------------------------------
 */
@@ -166,7 +172,7 @@ h1 {
 .transfers {
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 70%;
   
   filter: drop-shadow(0 0 0.55rem rgb(26, 26, 26));
   font-size: 20px;
@@ -175,7 +181,7 @@ h1 {
 /* This is the Transfer Component */
 .transferContainer {
   padding: 0px 20px 0px 20px;
-  background-color: var(--greyDark);
+  background-color: var(--blueBody);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -272,7 +278,7 @@ h1 {
   border: 1px solid;
   border-color: rgb(124, 124, 124);
   border-radius: 5px;
-  background-color: var(--greyDark);
+  background-color: var(--blueBody);
   
   font-size: 20px;
 }
@@ -297,11 +303,10 @@ h1 {
   border: 1px solid;
   border-color: rgb(124, 124, 124);
   border-radius: 5px;
-  background-color: var(--greyDark);
+  background-color: var(--blueBody);
   
   font-size: 20px;
 }
-
 
 
 /* LOGIN */
@@ -328,32 +333,36 @@ h1 {
 #Footer {
   position: fixed;
   bottom: 0;
-  right: 0;
-  width: 88%;
-  height: 10vh;
-  background-color: var(--greyDark);
-  
-  border-left: solid rgb(70, 70, 70);
-  box-sizing: border-box;
+  width: 55%;
+  height: 8vh;
+  background-color: var(--blueBody);
 
+  border-radius: 25px 25px 0 0;
+  
   display: flex;
   justify-content: space-around;
   align-items: center;
+  filter: drop-shadow(0 0 0.4rem rgb(0, 0, 0));
+
 }
 
 /* SPINBOX */
 .spinBox-container {
-  width: 400px; 
-  max-width: 400px; 
+  width: 350px; 
+  max-width: 350px; 
+  display: flex;
+  flex-direction:row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.spinBox-container div {
+  width: 20%;
   display: flex;
   flex-direction:row;
   justify-content: space-between;
-  background-color: rgb(88, 88, 88);
+
 }
 .spinBox-btn {
-  background-color: rgb(0, 225, 255);
-  text-align: center;
-  padding: 8px 15px 8px 15px;
   cursor: pointer;
   user-select: none; /* supported by Chrome and Opera */
 }

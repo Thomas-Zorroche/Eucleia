@@ -3,6 +3,10 @@ import { index } from 'd3';
 import { React, useEffect, useState } from 'react';
 import '../../style/component.css';
 
+import nextIcon from "./../../img/next.svg"
+import previousIcon from "./../../img/previous.svg"
+
+
 const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
 const years = ["2020", "2021", "2022"];
 
@@ -110,9 +114,11 @@ export const SpinBox = ({ type, onValueChange }) => {
 
   return (
     <div className="spinBox-container">
-      <span className="spinBox-btn" onClick={() => updateValueNeg()}>-</span>
       <span className="spinBox-value">{ stringValue }</span>
-      <span className="spinBox-btn" onClick={() => updateValuePos()}>+</span>
+      <div>
+        <img className="icon iconScaled spinBox-btn" src={previousIcon} width="26" height="26" alt="home" onClick={() => updateValueNeg()}/>
+        <img className="icon iconScaled spinBox-btn" src={nextIcon} width="26" height="26" alt="home" onClick={() => updateValuePos()}/>
+      </div>
     </div>
   );
 }

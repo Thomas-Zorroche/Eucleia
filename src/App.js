@@ -5,7 +5,7 @@ import './style/style.css';
 import { React, useEffect, useState } from 'react'
 
 import { MenuBar } from './components/ui/MenuBar'
-import { HeaderBar } from './components/ui/HeaderBar'
+import { BalanceHeader } from './components/ui/BalanceHeader'
 import { Main } from './components/Main'
 import { EDateFilter, Footer } from './components/ui/Footer';
 
@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="App">
 
-      <HeaderBar dateFilter={dateFilter} />
+      <BalanceHeader dateFilter={dateFilter} />
       
       <div id="Container-App">
         <MenuBar />

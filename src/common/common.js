@@ -1,6 +1,5 @@
 export const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
 
-
 export const getUserIndexByPseudo = (usersDatas, pseudo) => {
   return usersDatas.findIndex(user => user.pseudo === pseudo);
 }
@@ -63,3 +62,10 @@ export const getMonthNameFromDate = (date) => {
 
   return monthNames[monthIndex];
 }
+
+export const getFirstLetter = (string) => {
+  if (!string || string.length === 0) 
+    return
+
+  return string.substring(0, 1).toUpperCase();
+} 
