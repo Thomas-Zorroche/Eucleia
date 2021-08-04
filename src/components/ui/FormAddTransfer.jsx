@@ -22,7 +22,7 @@ export const FormAddTransfer = ({ index, dateOption }) => {
       </div>
 
       <div>
-        <input type="number" name={"value_" + index} min="0" max="10000" required />
+        <input type="number" name={"value_" + index} min="-2000" max="10000" step="0.01" required />
       </div>
 
       <div>

@@ -31,7 +31,13 @@ export const VirementPage = ({ usersDatas, dateFilter }) => {
       return res.json();
     })
     .then( transfers => {
-      setTransfers(transfers && Array.isArray(transfers) ? transfers : []);
+      if (transfers && Array.isArray(transfers))
+      {
+        setTransfers(transfers.map(transfer => {
+          const value = transfer.value;
+          return ({...transfer, expense: value < 0, value: Math.abs(transfer.value)});
+        }));
+      }
     })
   }
 

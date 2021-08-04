@@ -48,9 +48,11 @@ if (isset($_POST["year"]) && isset($_POST["userCount"]))
     $queryParamPerso = " AND transfer.perso = :perso";
     $queryParamMonth = " AND MONTH(transfer.date) = :monthValue";
     $queryParamYear  = " AND YEAR(transfer.date) = :yearValue";
+    $queryExpenses   = " AND transfer.value < 0";
+    $queryIncomes    = " AND transfer.value > 0";
 
     // Build Where Clause
-    $whereClause = " WHERE user.pseudo = :pseudo";
+    $whereClause = " WHERE user.pseudo = :pseudo" . $queryExpenses;
 
     if (array_key_exists("monthValue", $params))
       $whereClause .=  $queryParamMonth;

@@ -80,7 +80,7 @@ for($i = 0; $i < $transferCount; $i++)
 {
   if (!getValue($value, "value_" . strval($i)))     break;
 
-  if (!getDateValue($date, "date_" . strval($i)))        break;
+  if (!getDateValue($date, "date_" . strval($i)))   break;
 
   if (!getValue($type, "type_" . strval($i)))       break;
 

@@ -92,9 +92,9 @@ export const Transfer = ({ transfer, usersDatas}) => {
         <p className="transferComment" style={{flexGrow:4}}>{(transfer && transfer.comment) || "commentaires"}</p>
 
         <p className="transferValue"
-          style={{color: (value > 0) ? "green" : "red"}}
+          style={{color: transfer && transfer.expense ? "red" : "green"}}
         >
-          {(value > 0) ? "+" + value + "€" : value + "€"}
+          {transfer && transfer.expense ? "-" + value + "€" : "+" + value + "€"}
         </p>
       </div>
     </div>

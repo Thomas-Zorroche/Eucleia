@@ -54,7 +54,8 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
       setDataX(transfers.map(transfer => getMonthNameFromDate(transfer.date)));
 
       setDataY(transfers.map(transfer => {
-        return ({...transfer, userColor: getMainColorFromPseudo(transfer.user, usersDatas)});
+        const value = transfer.value;
+        return ({...transfer, expense: value < 0, value: Math.abs(transfer.value), userColor: getMainColorFromPseudo(transfer.user, usersDatas)});
       }));
       
     })
@@ -76,7 +77,7 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
   return (
     <div id="Page">
         
-        <h1>Graphiques - {dataY.length}</h1>
+        <h1>Graphiques - {dataY.length} dépenses</h1>
 
         <div className="transfer-hover">
           <Transfer transfer={transferHover} usersDatas={usersDatas} />
@@ -92,6 +93,7 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
           dateFilter={dateFilter}
           colorizeType={colorizeType}
         />
+
         
         <div>
           <span>Colorize by types</span>
