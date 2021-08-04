@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 
 import { EDateOption } from '../../pages/AddTransferPage'
 
@@ -8,9 +8,29 @@ export const FormAddTransfer = ({ index, dateOption }) => {
 
   const [secret, setSecret] = useState(false)
 
+  const [types, setTypes] = useState([])
+
   const updateSecret = (e) => {
     setSecret(secret ? false : true);
   }
+
+  useEffect(() => {
+    const form = new FormData();
+    form.append("getTypes", true);
+
+    fetch("http://localhost/Eucleia/api/validateType.php", {
+      method: "POST",
+      body: form
+    })
+    .then(res => {
+      return res.json();
+    })
+    .then( types => {
+      if (!types) return;
+      console.log(types)
+      setTypes(types);
+    })
+  }, [])
 
   return(
     <div className="formAddTransfer">
@@ -35,10 +55,7 @@ export const FormAddTransfer = ({ index, dateOption }) => {
 
       <div>
         <select name={"type_" + index}>
-          <option defaultValue="Courses">Courses</option>
-          <option defaultValue="Autres">Autre</option>
-          <option defaultValue="Restaurant">Restaurant</option>
-          <option defaultValue="Transports">Transport</option>
+          {types.map(type => <option defaultValue={type.label}>{type.label}</option>)}
         </select>
       </div>
 
