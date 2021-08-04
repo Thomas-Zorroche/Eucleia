@@ -52,8 +52,12 @@ export const FilterUserCircle = ({ pseudo, colors, filterInit, onUserFilterChang
   }, [])
 
   return (
-    <div className="filterUserCircle" title={filter} style={{backgroundColor: backgroundColor, borderColor: borderColor}} onClick={() => updateFilter()}>
-      {letter}
+    <div className="filterUserCircle-container">
+      <div className="filterUserCircle" title={filter} style={{backgroundColor: backgroundColor, borderColor: borderColor}} onClick={() => updateFilter()}>
+        {letter}
+      </div>
+
+      <p>{filter}</p>
     </div>
   );
 };

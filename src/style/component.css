@@ -322,7 +322,7 @@ h1 {
   bottom: 0;
   right: 0;
   width: 88%;
-  height: 8vh;
+  height: 10vh;
   background-color: var(--greyDark);
   
   border-left: solid rgb(70, 70, 70);
@@ -357,19 +357,32 @@ h1 {
 
 
 /* FilterUserCircle */ 
+.filterUserCircle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.filterUserCircle-container p {
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 .filterUserCircle {
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
   border: 3px solid white;
+  font-size: 22px;
   user-select: none; /* supported by Chrome and Opera */
-}
 
+  transition: all .4s ease-in-out;
+}
 .filterUserCircle:hover {
-  font-size: 1.1em;
+  transform: scale(1.1);
 }
 
 
