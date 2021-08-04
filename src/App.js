@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="App">
 
-      <HeaderBar />
+      <HeaderBar dateFilter={dateFilter} />
       
       <div id="Container-App">
         <MenuBar />
