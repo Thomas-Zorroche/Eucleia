@@ -6,13 +6,14 @@ import { BaseButton } from '../components/ui/BaseButton';
 import { EDateFilter } from '../components/ui/Footer';
 
 
-export const VirementPage = ({ usersDatas, dateFilter }) => {
+export const VirementPage = ({ usersDatas, dateFilter, showExpanses }) => {
 
   const [transfers, setTransfers] = useState([])
 
   async function loadData() {
 
     const form = new FormData();
+    form.append("showExpanses", showExpanses ? '1' : '0');
     form.append("year", dateFilter.value.substring(0, 4));
     if (dateFilter.type === EDateFilter.MONTH)
       form.append("month", dateFilter.value.substring(5, 7));
@@ -36,7 +37,7 @@ export const VirementPage = ({ usersDatas, dateFilter }) => {
         setTransfers(transfers
           .map(transfer => {
             const value = transfer.value;
-            return ({...transfer, expense: value < 0, value: Math.abs(transfer.value)});
+            return ({...transfer, expense: showExpanses, value: Math.abs(transfer.value)});
           })
           .sort((a, b) => {
             return new Date(a.date) - new Date(b.date);
@@ -49,7 +50,7 @@ export const VirementPage = ({ usersDatas, dateFilter }) => {
   useEffect(() => {
     if (dateFilter && usersDatas && usersDatas.length !== 0)
       loadData();
-  }, [dateFilter, usersDatas])
+  }, [dateFilter, usersDatas, showExpanses])
 
 
   return (

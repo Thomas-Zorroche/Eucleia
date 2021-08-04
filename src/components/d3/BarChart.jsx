@@ -105,11 +105,8 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTrans
           )}
 
           {yValues.map((data, index) => {
-            console.log(xValues[index])
             if (!xScale(xValues[index]))
               return "";
-
-
 
             // We count occurences of the same date in order to display transfer correctly
             // {count: , index: }

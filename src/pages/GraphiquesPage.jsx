@@ -13,7 +13,7 @@ const sortByDates = (data) => {
   })
 }
 
-export const GraphiquePage = ({ usersDatas, dateFilter }) => {
+export const GraphiquePage = ({ usersDatas, dateFilter, showExpanses }) => {
   // Contains dates
   const [dataX, setDataX] = useState([]);
   // Contains transfer
@@ -26,7 +26,8 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
   async function loadData()
   {
     const form = new FormData();
-    
+
+    form.append("showExpanses", showExpanses ? '1' : '0');
     form.append("year", dateFilter.value.substring(0, 4));
     if (dateFilter.type === EDateFilter.MONTH)
       form.append("month", dateFilter.value.substring(5, 7));
@@ -64,7 +65,7 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
   useEffect(() => {
     if (dateFilter && usersDatas && usersDatas.length !== 0)
       loadData();
-  }, [dateFilter, usersDatas])
+  }, [dateFilter, usersDatas, showExpanses])
 
   const onTransferHover = (hover, index) => {
     setTransferHover(hover ? dataY[index] : null)

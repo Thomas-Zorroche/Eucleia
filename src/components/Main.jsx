@@ -11,7 +11,7 @@ import { UserPage } from '../pages/UserPage';
 import { OptionPage } from '../pages/OptionPage';
 
 
-export const Main = ({ usersDatas, dateFilter }) => {
+export const Main = ({ usersDatas, dateFilter, showExpanses }) => {
 
   return (
     <Switch> {/* The Switch decides which component to show based on the current URL.*/}
@@ -20,11 +20,11 @@ export const Main = ({ usersDatas, dateFilter }) => {
 
       <ProtectedRoute exact path='/' component={AccueilPage}></ProtectedRoute>
 
-      <ProtectedRoute exact path='/virements' usersDatas={usersDatas} dateFilter={dateFilter} component={VirementPage}></ProtectedRoute>
+      <ProtectedRoute exact path='/virements' component={VirementPage} usersDatas={usersDatas} dateFilter={dateFilter} showExpanses={showExpanses} ></ProtectedRoute>
 
       <ProtectedRoute exact path='/addTransfer' component={AddTransferPage}></ProtectedRoute>
 
-      <ProtectedRoute exact path='/graphiques' usersDatas={usersDatas} dateFilter={dateFilter} component={GraphiquePage}></ProtectedRoute>
+      <ProtectedRoute exact path='/graphiques' component={GraphiquePage} usersDatas={usersDatas} dateFilter={dateFilter} showExpanses={showExpanses}></ProtectedRoute>
 
       <ProtectedRoute exact path='/user' component={UserPage}></ProtectedRoute>
 

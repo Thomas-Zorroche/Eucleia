@@ -29,6 +29,8 @@ function App() {
   const [usersDatas, setUsersDatas] = useState([])
   // Type of Filter and value for Date
   const [dateFilter, setDateFilter] = useState({type: EDateFilter.MONTH, value:""})
+  // Whether it displays expanses or incomes (default: expanses)
+  const [showExpanses, setShowExpanses] = useState(true)
 
 
   useEffect(() => {
@@ -62,6 +64,10 @@ function App() {
     }))
   }
 
+  const onShowExpansesChanged = (showExpanses_) => {
+    setShowExpanses(showExpanses_);
+  }
+
   return (
     <div className="App">
 
@@ -69,10 +75,17 @@ function App() {
       
       <div id="Container-App">
         <MenuBar />
-        <Main usersDatas={usersDatas} dateFilter={dateFilter} />
+        <Main 
+          usersDatas={usersDatas} 
+          dateFilter={dateFilter}
+          showExpanses={showExpanses} />
       </div>
 
-      <Footer onDateFilterChange={onDateFilterChange} onUserFilterChange={onUserFilterChange} usersDatas={usersDatas}/>
+      <Footer 
+        onDateFilterChange={onDateFilterChange} 
+        onUserFilterChange={onUserFilterChange} 
+        onShowExpansesChanged={onShowExpansesChanged}
+        usersDatas={usersDatas}/>
 
     </div>
   );

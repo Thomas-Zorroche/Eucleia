@@ -7,10 +7,14 @@ export const ProtectedRoute = ({ component: Component, ...restOfProps }) => {
   return (
     <Route
       {...restOfProps}
-      render={(props) =>
-        isLogin ? <Component 
-          {...props} usersDatas={restOfProps.usersDatas || {}} dateFilter={restOfProps.dateFilter || {}}
-        /> : <Redirect to="/login" />
+      render={(props) => isLogin 
+        ? <Component
+            {...props} 
+            usersDatas = {restOfProps.usersDatas || {}} 
+            dateFilter = {restOfProps.dateFilter || {}}
+            showExpanses = {restOfProps.showExpanses} 
+          /> 
+        : <Redirect to="/login" />
       }
     />
   );

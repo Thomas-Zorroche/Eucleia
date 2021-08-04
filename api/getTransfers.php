@@ -7,9 +7,10 @@ include("db_connect.php");
 
 
 
-if (isset($_POST["year"]) && isset($_POST["userCount"]))
+if (isset($_POST["year"]) && isset($_POST["userCount"]) && isset($_POST["showExpanses"]))
 {
   $userCount = $_POST["userCount"];
+  $showExpanses = $_POST["showExpanses"] == '1' ? true : false;
 
   // Commun Parameters
   $params = array();
@@ -52,7 +53,9 @@ if (isset($_POST["year"]) && isset($_POST["userCount"]))
     $queryIncomes    = " AND transfer.value > 0";
 
     // Build Where Clause
-    $whereClause = " WHERE user.pseudo = :pseudo" . $queryExpenses;
+    $whereClause = " WHERE user.pseudo = :pseudo";
+
+    $whereClause .= $showExpanses == "1" ? $queryExpenses : $queryIncomes;
 
     if (array_key_exists("monthValue", $params))
       $whereClause .=  $queryParamMonth;

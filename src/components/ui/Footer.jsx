@@ -11,9 +11,11 @@ export const EDateFilter = {
   WEEK: "Week"
 }
 
-export const Footer = ({ onDateFilterChange, onUserFilterChange, usersDatas }) => {
+export const Footer = ({ onDateFilterChange, onUserFilterChange, onShowExpansesChanged, usersDatas }) => {
 
   const [dateFilter, setDateFilter] = useState({type: EDateFilter.MONTH, value:""})
+  // Whether it displays expanses or incomes (default: expanses)
+  const [showExpanses, setShowExpanses] = useState(true)
 
   const updateDateFilter = (e) => {
     let filterString = e.target.value;
@@ -24,26 +26,38 @@ export const Footer = ({ onDateFilterChange, onUserFilterChange, usersDatas }) =
     else if (filterString === "Month")
       setDateFilter({...dateFilter, type: EDateFilter.MONTH})
   }
-
-  const onSpinBoxValueChange = (newValue) => {
-    setDateFilter({...dateFilter, value: newValue})
-  }
-
+  
   useEffect(() => {
     onDateFilterChange(dateFilter);
   }, [dateFilter])
 
+  const onSpinBoxValueChange = (newValue) => {
+    setDateFilter({...dateFilter, value: newValue})
+  }
+  
   const onFilterUserCircleChange = (newUserFilter, userIndex) => {
     onUserFilterChange(newUserFilter, userIndex)
   }
+  
+  const updateShowExpanses = (e) => {
+    setShowExpanses(e.target.value === "expanses")
+  }
+  useEffect(() => {
+    onShowExpansesChanged(showExpanses);
+  }, [showExpanses])
 
   return (
     <div id="Footer" style={{display: JSON.parse(sessionStorage.getItem("isLogin")) || false ? "flex" : "none"}}>
       <SpinBox type={dateFilter.type} onValueChange={onSpinBoxValueChange} />
 
-      <select name="date_option"  onClick={(e) => updateDateFilter(e)}>
+      <select name="date_option" onClick={(e) => updateDateFilter(e)}>
               <option value="Month">Mois</option>
               <option value="Year">Année</option>
+      </select>
+
+      <select name="showExpanses" onClick={(e) => updateShowExpanses(e)}>
+              <option value="expanses">Dépenses</option>
+              <option value="incomes">Revenus</option>
       </select>
 
       {usersDatas.map((user, index) => {
