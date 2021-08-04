@@ -36,9 +36,9 @@ export const FormAddTransfer = ({ index, dateOption }) => {
       <div>
         <select name={"type_" + index}>
           <option defaultValue="Courses">Courses</option>
-          <option defaultValue="Autres">Autres</option>
+          <option defaultValue="Autres">Autre</option>
           <option defaultValue="Restaurant">Restaurant</option>
-          <option defaultValue="Transports">Transports</option>
+          <option defaultValue="Transports">Transport</option>
         </select>
       </div>
 

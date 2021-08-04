@@ -30,7 +30,7 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTrans
 
   const xScale = scaleBand()
     .domain(domainX)
-    .range([0, innerWidth])
+    .range([-1, innerWidth])  // -1 --> display transfer for first day of month
     .paddingInner(innerPadding);
 
   const yScale = scaleLinear()
@@ -105,8 +105,10 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTrans
           )}
 
           {yValues.map((data, index) => {
+            console.log(xValues[index])
             if (!xScale(xValues[index]))
               return "";
+
 
 
             // We count occurences of the same date in order to display transfer correctly

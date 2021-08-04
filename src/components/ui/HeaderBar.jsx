@@ -24,7 +24,7 @@ export const HeaderBar = () => {
     <div id="HeaderBar" style={{display: isLogin ? "flex" : "none"}}>
 
       <div id="HeaderLeft">
-        <h1>Eucleia</h1>
+        <h1>Eucleia</h1> 
 
         <HeaderValueViewer label="Entrées" color="green"/>
 

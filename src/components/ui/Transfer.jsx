@@ -69,8 +69,6 @@ export const Transfer = ({ transfer, usersDatas, isTransfertChartPreview}) => {
     })
   }
 
-  console.log(isTransfertChartPreview)
-
   if (!transfer && !isTransfertChartPreview)
     return "";
 

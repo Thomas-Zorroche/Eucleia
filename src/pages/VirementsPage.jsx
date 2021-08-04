@@ -33,10 +33,15 @@ export const VirementPage = ({ usersDatas, dateFilter }) => {
     .then( transfers => {
       if (transfers && Array.isArray(transfers))
       {
-        setTransfers(transfers.map(transfer => {
-          const value = transfer.value;
-          return ({...transfer, expense: value < 0, value: Math.abs(transfer.value)});
-        }));
+        setTransfers(transfers
+          .map(transfer => {
+            const value = transfer.value;
+            return ({...transfer, expense: value < 0, value: Math.abs(transfer.value)});
+          })
+          .sort((a, b) => {
+            return new Date(a.date) - new Date(b.date);
+          })
+        );
       }
     })
   }

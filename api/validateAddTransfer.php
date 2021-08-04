@@ -87,14 +87,13 @@ for($i = 0; $i < $transferCount; $i++)
   if (!getValue($comment, "comment_" . strval($i))) break;
 
   // Special case: checkbox
-  $secret = (isset($_POST["secret_" . strval($i)])) ? 1 : 0; 
-  if ($secret)
-  {
-    $perso = true;  // If secret, perso active by default
+  $secret = isset($_POST["secret_" . strval($i)]) ? '1' : '0'; 
+  $perso = '0';
+  if ($secret) {
+    $perso = '1';  // If secret, perso active by default
   }
-  else
-  {
-    $perso = (isset($_POST["perso_" . strval($i)])) ? 1 : 0; 
+  else {
+    $perso = isset($_POST["perso_" . strval($i)]) ? '1' : '0'; 
   }
 
 
