@@ -80,7 +80,7 @@ export const GraphiquePage = ({ usersDatas, dateFilter }) => {
         <h1>Graphiques - {dataY.length} dépenses</h1>
 
         <div className="transfer-hover">
-          <Transfer transfer={transferHover} usersDatas={usersDatas} />
+          <Transfer transfer={transferHover} usersDatas={usersDatas} isTransfertChartPreview={true} />
         </div>
         
         <BarChart

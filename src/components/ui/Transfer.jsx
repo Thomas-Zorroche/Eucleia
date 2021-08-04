@@ -15,7 +15,7 @@ transfer:
 - secret (OPT)
 
 */
-export const Transfer = ({ transfer, usersDatas}) => {
+export const Transfer = ({ transfer, usersDatas, isTransfertChartPreview}) => {
 
   const [isSecret, setIsSecret] = useState()
   const [backgroundColor, setBackgroundColor] = useState("")
@@ -69,34 +69,49 @@ export const Transfer = ({ transfer, usersDatas}) => {
     })
   }
 
+  console.log(isTransfertChartPreview)
 
-  return (
-    <div>
-      {isSecret && 
-        <div className="inputTextSecretTransfer">
-          <input type="password" placeholder="password" defaultValue={password} onChange={(e) => updatePassword(e)}/> 
-          <BaseButton label="Montrer" submit={false} callback={showSecretTransfer}/>
-        </div>}
+  if (!transfer && !isTransfertChartPreview)
+    return "";
 
-      <div className={isSecret ? "transferContainer transferContainerSecret" :  "transferContainer"}
-        style={{backgroundColor: backgroundColor}}
-      >
-        <p className="transferUser" >{(transfer && transfer.user) || "Pseudo"}</p>
-
-        <p className="transferPerso">{(transfer && (transfer.perso === "1" ? "Perso" : "Commun")) || "" }</p>
-
-        <p className="transferDate">{(transfer && transfer.date) || "date"}</p>
-
-        <p className="transferType" style={{backgroundColor: transfer ? transfer.color : "" }}>{(transfer && transfer.type) || "type"}</p>
-
-        <p className="transferComment" style={{flexGrow:4}}>{(transfer && transfer.comment) || "commentaires"}</p>
-
-        <p className="transferValue"
-          style={{color: transfer && transfer.expense ? "red" : "green"}}
-        >
-          {transfer && transfer.expense ? "-" + value + "€" : "+" + value + "€"}
-        </p>
+  if (!transfer && isTransfertChartPreview)
+  {
+    return(
+      <div className="transferContainer" style={{backgroundColor: "var(--greyDark)"}}>
+        <p>Survoler un virement pour avoir les détails</p>
       </div>
-    </div>
-  )
+    )
+  }
+  else if (transfer)
+  {
+    return (
+      <div>
+        {isSecret && 
+          <div className="inputTextSecretTransfer">
+            <input type="password" placeholder="password" defaultValue={password} onChange={(e) => updatePassword(e)}/> 
+            <BaseButton label="Montrer" submit={false} callback={showSecretTransfer}/>
+          </div>}
+  
+        <div className={isSecret ? "transferContainer transferContainerSecret" :  "transferContainer"}
+          style={{backgroundColor: backgroundColor}}
+        >
+  
+          <p className="transferUser" >{(transfer.user) || "Pseudo"}</p>
+  
+          <p className="transferPerso">{((transfer.perso === "1" ? "Perso" : "Commun")) || "" }</p>
+  
+          <p className="transferDate">{(transfer.date) || "date"}</p>
+  
+          <p className="transferType" style={{backgroundColor: transfer ? transfer.color : "" }}>{(transfer && transfer.type) || "type"}</p>
+  
+          <p className="transferComment" style={{flexGrow:4}}>{(transfer.comment) || "commentaires"}</p>
+  
+          <p className="transferValue" style={{color: transfer.expense ? "red" : "green"}}>
+            {transfer.expense ? "-" + value + "€" : "+" + value + "€"}
+          </p>
+  
+        </div>
+      </div>
+    )
+  }
 }
