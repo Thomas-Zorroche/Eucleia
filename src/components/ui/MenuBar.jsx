@@ -23,6 +23,7 @@ export const MenuBar = () => {
 
   const [activeButtons, setActivesButton] = useState([true, false, false])
   const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem("isLogin")) || false)
+  const [mouseOver, setMouseOver] = useState(false)
 
   const logOut = () => {
     sessionStorage.setItem("isLogin", false);
@@ -48,20 +49,30 @@ export const MenuBar = () => {
     }
   }
 
+  const onMouseEnter = () => {
+    setMouseOver(true)
+  }
+  const onMouseLeave = () => {
+    setMouseOver(false)
+  }
+
   return (
-    <div id="MenuBar" style={{display: JSON.parse(sessionStorage.getItem("isLogin")) || false ? "flex" : "none"}}>
-      <p id="Logo">Eucleia</p>
+    <div id="MenuBar" 
+      style={{display: JSON.parse(sessionStorage.getItem("isLogin")) || false ? "flex" : "none"}}
+      onMouseEnter={() => onMouseEnter()} onMouseLeave={() => onMouseLeave()}
+    >
+      <p id="Logo">{mouseOver ? "Eucleia" : "E"}</p>
       <ul>
         <Link to="/">
-          <MenuButton active={activeButtons[0]} icon={homeIcon} onActiveChanged={changeMenu} label="Accueil"/>
+          <MenuButton active={activeButtons[0]} mouseOver={mouseOver} icon={homeIcon} onActiveChanged={changeMenu} label="Accueil"/>
         </Link>
 
         <Link to="/virements">
-          <MenuButton active={activeButtons[1]} icon={transfersIcon} onActiveChanged={changeMenu} label="Virements"/>
+          <MenuButton active={activeButtons[1]} mouseOver={mouseOver} icon={transfersIcon} onActiveChanged={changeMenu} label="Virements"/>
         </Link>
 
         <Link to="/graphiques">
-          <MenuButton active={activeButtons[2]} icon={graphIcon} onActiveChanged={changeMenu} label="Graphiques"/>
+          <MenuButton active={activeButtons[2]} mouseOver={mouseOver} icon={graphIcon} onActiveChanged={changeMenu} label="Graphiques"/>
         </Link>
       </ul>
 
@@ -72,13 +83,17 @@ export const MenuBar = () => {
           </p>
         </Link>
 
-        <div>
-          <Link to="/option"><img className="icon iconScaled" src={settingsIcon} width="26" height="26" alt="home" /></Link>
-        </div>
-
-        <div>
-          <img className="icon iconScaled"src={logoutIcon} width="26" height="26" alt="home" onClick={() => logOut()}/>
-        </div>
+        {mouseOver &&
+          <div>
+            <Link to="/option"><img className="icon iconScaled" src={settingsIcon} width="26" height="26" alt="home" /></Link>
+          </div>
+        }
+        
+        {mouseOver &&
+          <div>
+            <img className="icon iconScaled"src={logoutIcon} width="26" height="26" alt="home" onClick={() => logOut()}/>
+          </div>
+        }
       </div>
 
 

@@ -90,7 +90,7 @@
   z-index: 10;
   position: fixed;
   padding-top: 0px;
-  width: 15%;
+  width: 5%;
   height: 100vh;
   background-color: var(--blueBody);
   filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
@@ -99,6 +99,10 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  transition: all .4s ease-in-out;
+}
+#MenuBar:hover {
+  width: 15%;
 }
 #MenuBar ul a {
   width: 100%;
@@ -117,13 +121,10 @@
   font-size: 0.8em;
   font-variant: small-caps;
 }
-#Logo {
-  width: 75%;
-  text-align: center;
-  padding-bottom: 15px;
-  font-size: 1.5em;
-  margin-bottom: 0;
-  border-bottom: 1px solid var(--red);
+#MenuBar li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .menuButton {
   cursor: pointer;
@@ -164,6 +165,14 @@
   border-radius: 50%;
   text-align: center;
 }
+#Logo {
+  width: 75%;
+  text-align: center;
+  padding-bottom: 15px;
+  font-size: 1.5em;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--red);
+}
 
 /* TRANFSERS 
 --------------------------------------------------------
@@ -174,7 +183,7 @@
   flex-direction: column;
   width: 70%;
   
-  filter: drop-shadow(0 0 0.55rem rgb(26, 26, 26));
+  filter: drop-shadow(0 0 0.55rem rgb(0, 0, 0));
   font-size: 20px;
   margin: 50px;
 }
@@ -186,7 +195,7 @@
   justify-content: space-between;
   align-items: center;
 
-  border-bottom: 1px solid rgb(139, 139, 139);
+  border-bottom: 1px solid var(--blueTypo);
 }
 .transferContainerSecret {
   -webkit-filter: blur(15px);

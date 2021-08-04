@@ -62,7 +62,7 @@ export const VirementPage = ({ usersDatas, dateFilter, showExpanses }) => {
       </Link>
 
       <div className="transfers">
-        <div className="transferContainer transferHeader"  style={{backgroundColor: "var(--greyDark)"}}>
+        <div className="transferContainer transferHeader"  style={{backgroundColor: "var(--blueBody)"}}>
           <p>User</p>
           <p>Perso</p>
           <p>Date</p>
