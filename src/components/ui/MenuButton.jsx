@@ -20,7 +20,7 @@ export const MenuButton = ({ active, label, icon, onActiveChanged, mouseOver }) 
   return (
     <li >
       <div className={_active ? "menuButton menuButtonActive" : "menuButton"} onClick={click}>
-        <img className="icon" src={icon} width="26" height="26" alt="home"/>
+        <img className="iconWhite" src={icon} width="26" height="26" alt="home"/>
         {mouseOver && label}
       </div>
     </li>

@@ -116,8 +116,8 @@ export const SpinBox = ({ type, onValueChange }) => {
     <div className="spinBox-container">
       <span className="spinBox-value">{ stringValue }</span>
       <div>
-        <img className="icon iconScaled spinBox-btn" src={previousIcon} width="26" height="26" alt="home" onClick={() => updateValueNeg()}/>
-        <img className="icon iconScaled spinBox-btn" src={nextIcon} width="26" height="26" alt="home" onClick={() => updateValuePos()}/>
+        <img className="iconBlueTypo spinBox-btn" src={previousIcon} width="26" height="26" alt="home" onClick={() => updateValueNeg()}/>
+        <img className="iconBlueTypo spinBox-btn" src={nextIcon} width="26" height="26" alt="home" onClick={() => updateValuePos()}/>
       </div>
     </div>
   );

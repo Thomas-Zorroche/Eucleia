@@ -45,6 +45,37 @@ input[type=text], input[type=password] {
   color: white;
 }
 
+input[type=number], input[type=date] {
+  box-sizing: border-box;
+  font-size: 0.7em;
+  background-color: var(--blueTypo);
+  border: none;
+  padding: 12px 20px;
+
+}
+
+input[type=color] {
+  -webkit-appearance: none;
+	border: none;
+	width: 32px;
+	height: 32px;
+}
+
+select {
+  border: none;
+  font-size: 20px;
+  padding: 10px;
+  background-color: var(--blueTypo);
+  color: var(--blueBackground);
+}
+
+
+input[type="checkbox"] {
+  cursor: pointer; 
+}
+
+
+
 svg text {
   cursor: default;
   -webkit-user-select: none;

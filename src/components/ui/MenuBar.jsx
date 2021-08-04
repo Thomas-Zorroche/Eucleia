@@ -85,13 +85,13 @@ export const MenuBar = () => {
 
         {mouseOver &&
           <div>
-            <Link to="/option"><img className="icon iconScaled" src={settingsIcon} width="26" height="26" alt="home" /></Link>
+            <Link to="/option"><img className="iconBlueTypo iconScaled" src={settingsIcon} width="26" height="26" alt="home" /></Link>
           </div>
         }
         
         {mouseOver &&
           <div>
-            <img className="icon iconScaled"src={logoutIcon} width="26" height="26" alt="home" onClick={() => logOut()}/>
+            <img className="iconBlueTypo iconScaled" style={{cursor: "pointer"}} src={logoutIcon} width="26" height="26" alt="home" onClick={() => logOut()}/>
           </div>
         }
       </div>

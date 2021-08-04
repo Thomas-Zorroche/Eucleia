@@ -89,7 +89,6 @@ export const GraphiquePage = ({ usersDatas, dateFilter, showExpanses }) => {
           height={750} 
           dataX={dataX} 
           dataY={dataY}
-          backgroundColor={getColorVariants(sessionStorage.getItem("userColor")).colorDark}
           onTransferHover={onTransferHover}
           dateFilter={dateFilter}
           colorizeType={colorizeType}

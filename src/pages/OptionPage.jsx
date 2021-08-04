@@ -96,7 +96,7 @@ export const OptionPage = () => {
 
       {types.map((t, index) => {
         return (
-          <div key={index}>
+          <div key={index} className="option-type-container">
             <input type="text"  defaultValue={t.label} onChange={(e) => onLabelChanged(e, index)}/>
             <input type="color" defaultValue={t.color} onChange={(e) => onColorChanged(e, index)}/>
           </div>

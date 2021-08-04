@@ -43,8 +43,14 @@
 
 /* SVG */
 /* https://codepen.io/sosuke/pen/Pjoqqp */
-.icon {
+.iconWhite {
   filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(159deg) brightness(98%) contrast(107%);
+}
+.iconBlueTypo {
+  filter: invert(62%) sepia(13%) saturate(880%) hue-rotate(196deg) brightness(85%) contrast(87%);
+}
+.iconBlueTypo:hover {
+  filter: invert(42%) sepia(89%) saturate(3549%) hue-rotate(342deg) brightness(90%) contrast(96%);
 }
 .iconScaled:hover {
   transform: scale(1.2);
@@ -428,4 +434,11 @@
   transform: scale(1.1);
 }
 
+/* Options */
+.option-type-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+}
 

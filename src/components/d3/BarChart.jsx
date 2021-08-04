@@ -7,7 +7,7 @@ import { EDateFilter } from "../ui/Footer";
 
 /* CONSTANTS PARAMETERS */
 const margin = { top:50, right:40, bottom:50, left:70 };
-const innerPadding = 0.6; // padding between bars
+const innerPadding = 0.4; // padding between bars
 /* ---------------------------------------------------------- */
 
 // Round maxValue up to the nearest 10
@@ -17,7 +17,7 @@ const getMaxValue = (data) => {
 } 
 
 // Bar Chart Object
-export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTransferHover, dateFilter, colorizeType }) => {
+export const BarChart = ({ width, height, dataX, dataY, onTransferHover, dateFilter, colorizeType }) => {
   const [yValues, setYValues] = useState(dataY);
   const [maxValueY, setMaxYValue] = useState(getMaxValue(dataY));
   const [xValues, setXValues] = useState(dataX) 
@@ -72,9 +72,9 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTrans
   }
 
   return (
-    <div>
+    <div style={{cursor: "crosshair"}}>
       <svg height={height} width={width}>
-        <rect width="100%" height="100%" fill={backgroundColor} rx="15" ry="15" />      
+        <rect width="100%" height="100%" fill={"var(--blueBody)"} rx="15" ry="15" />      
         <g transform={`translate(${margin.left}, ${margin.top})`}>
 
           {dataX.length === 0 && <text fill="white" x={(width/2) - 150} y={(height/2) - 100} >NO DATA</text>}
@@ -87,7 +87,7 @@ export const BarChart = ({ width, height, dataX, dataY, backgroundColor, onTrans
                 y1={yScale(tickValue)}
                 x2={innerWidth}
                 y2={yScale(tickValue)}
-                stroke="white"
+                stroke="var(--blueTypo)"
               />
             </g>
           )}
