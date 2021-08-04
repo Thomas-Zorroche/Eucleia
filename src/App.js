@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="App">
 
-      <BalanceHeader dateFilter={dateFilter} />
+      {JSON.parse(sessionStorage.getItem("isLogin")) && <BalanceHeader dateFilter={dateFilter} />}
       
       <div id="Container-App">
         <MenuBar />

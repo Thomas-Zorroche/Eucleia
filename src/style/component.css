@@ -29,7 +29,7 @@
   color: white;
   font-family: 'Ubuntu';
   border: 0px none;
-  padding: 10px;
+  padding: 10px 20px 10px 20px;
   margin: 15px;
   border-radius: 5px;
   cursor: pointer;
@@ -250,10 +250,14 @@
   font-size: 22px;
 }
 .transfer-hover {
-  margin: 40px;
+  margin: 0px;
   width: 50vw;
   min-width: 50vw;
-  font-size: 16px;
+  font-size: 18px;
+  margin: 20px;
+  min-height: 70px;
+  max-height: 70px;
+
 }
 .transfer-hover div {
   width: 100%;
@@ -333,8 +337,19 @@
 #LoginContainer input {
   height: 100%;
 }
+#Login-title-container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+#Login-title-container h1 {
+  margin: 0 20px 0 0;
+}
+#Login-title-container p {
+  font-size: 18px;
+}
 .loginFailedWarning {
-  color: red;
+  color: var(--red);
 }
 
 
@@ -380,6 +395,8 @@
   user-select: none; /* supported by Chrome and Opera */
   font-size: 0.8em;
 }
+
+
 
 
 /* FilterUserCircle */ 

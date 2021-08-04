@@ -55,19 +55,23 @@ export const LoginPage = () => {
     <div id="Page">
 
       <div id="LoginContainer">
-        <h1>Eucleia 0.1</h1>
+        <div id="Login-title-container">
+          <h1>Eucleia</h1> 
+          <p>0.1</p>
+        </div>
         
-        <h1>Login</h1>
+        <h2>Login</h2>
 
-        {loginFailed && <p className="loginFailedWarning">Mauvais identifiant ou mot de passe !</p>}
 
         <form>
-          <input type="text" name="pseudo" placeholder="username" value={pseudo} onChange={(e) => updatePseudo(e)} required/>
+          <input type="text" name="pseudo" autocomplete="off" placeholder="username" value={pseudo} onChange={(e) => updatePseudo(e)} required/>
 
           <input type="password" name="password" placeholder="password" defaultValue={password} onChange={(e) => updatePassword(e)} required/>
           
           <BaseButton label="Log" submit={false} callback={onLogin}/>
         </form>
+        
+        {loginFailed && <p className="loginFailedWarning">Mauvais identifiant ou mot de passe !</p>}
 
       </div>
 

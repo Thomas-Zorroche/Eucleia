@@ -32,8 +32,8 @@ export const SpinBox = ({ type, onValueChange }) => {
       const date = new Date();
       const currentIndexMonth = date.getMonth();
 
-      setValue(currentIndexMonth - 1);
-      setStringValue(months[currentIndexMonth - 1] + " 2021");
+      setValue(currentIndexMonth);
+      setStringValue(months[currentIndexMonth] + " 2021");
       setYearOfMonth(date.getFullYear())
     }
     else if (type === ESpinBoxType.YEAR)

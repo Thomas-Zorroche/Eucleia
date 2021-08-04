@@ -5,11 +5,14 @@ export const Bar = ({ value, x, y, height, bandwidth, color, onHover, index }) =
   const [dispalyValue, setDisplayValue] = useState(false); 
 
   const onMouseEnter = () => {
+    console.log("e")
     setDisplayValue(true)
     onHover(true, index)
   }
 
   const onMouseLeave = () => {
+    console.log("l")
+
     setDisplayValue(false)
     onHover(false, index)
 

@@ -32,3 +32,24 @@ a:visited
 a:hover {
 	color:white;
 }
+
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px;
+  box-sizing: border-box;
+  font-size: 0.7em;
+  background-color: var(--blueTypo);
+  border: none;
+  color: white;
+}
+
+svg text {
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
