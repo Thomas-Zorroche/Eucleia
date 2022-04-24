@@ -6,6 +6,8 @@ import { LoginPage } from '../pages/LoginPage';
 import { AccueilPage } from '../pages/AccueilPage';
 import { VirementPage } from '../pages/VirementsPage';
 import { GraphiquePage } from '../pages/GraphiquesPage';
+import { SubscriptionPage } from '../pages/SubscriptionPage';
+import { AddSubscriptionPage } from '../pages/AddSubscriptionPage';
 import { AddTransferPage } from '../pages/AddTransferPage';
 import { UserPage } from '../pages/UserPage';
 import { OptionPage } from '../pages/OptionPage';
@@ -24,7 +26,11 @@ export const Main = ({ usersDatas, dateFilter, showExpanses }) => {
 
       <ProtectedRoute exact path='/addTransfer' component={AddTransferPage}></ProtectedRoute>
 
+      <ProtectedRoute exact path='/addSubscription' component={AddSubscriptionPage} usersDatas={usersDatas}></ProtectedRoute>
+
       <ProtectedRoute exact path='/graphiques' component={GraphiquePage} usersDatas={usersDatas} dateFilter={dateFilter} showExpanses={showExpanses}></ProtectedRoute>
+
+      <ProtectedRoute exact path='/abonnements' component={SubscriptionPage} usersDatas={usersDatas} dateFilter={dateFilter}></ProtectedRoute>
 
       <ProtectedRoute exact path='/user' component={UserPage}></ProtectedRoute>
 

@@ -16,12 +16,13 @@ import transfersIcon from "../../img/transfers.svg"
 export const EMenu = {
   ACCEUIL: "Acceuil",
   VIREMENTS: "Virements",
-  GRAPHIQUES: "Graphiques"
+  GRAPHIQUES: "Graphiques",
+  ABONNEMENTS: "Abonnements"
 }
 
 export const MenuBar = () => {
 
-  const [activeButtons, setActivesButton] = useState([true, false, false])
+  const [activeButtons, setActivesButton] = useState([true, false, false, false])
   const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem("isLogin")) || false)
   const [mouseOver, setMouseOver] = useState(false)
 
@@ -35,16 +36,19 @@ export const MenuBar = () => {
     // Change Active Menu
     switch (label) {
       case EMenu.ACCEUIL:    
-        setActivesButton([true, false, false])
+        setActivesButton([true, false, false, false])
         break;
       case EMenu.VIREMENTS:  
-        setActivesButton([false, true, false])  
+        setActivesButton([false, true, false, false])  
         break;
       case EMenu.GRAPHIQUES: 
-        setActivesButton([false, false, true])
+        setActivesButton([false, false, true, false])
+        break;
+      case EMenu.ABONNEMENTS: 
+        setActivesButton([false, false, false, true])
         break;
       default:              
-        setActivesButton([true, false, false])
+        setActivesButton([true, false, false, false])
         break;
     }
   }
@@ -73,6 +77,10 @@ export const MenuBar = () => {
 
         <Link to="/graphiques">
           <MenuButton active={activeButtons[2]} mouseOver={mouseOver} icon={graphIcon} onActiveChanged={changeMenu} label="Graphiques"/>
+        </Link>
+
+        <Link to="/abonnements">
+          <MenuButton active={activeButtons[3]} mouseOver={mouseOver} icon={graphIcon} onActiveChanged={changeMenu} label="Abonnements"/>
         </Link>
       </ul>
 

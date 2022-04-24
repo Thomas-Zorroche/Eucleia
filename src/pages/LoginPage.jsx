@@ -57,7 +57,7 @@ export const LoginPage = () => {
       <div id="LoginContainer">
         <div id="Login-title-container">
           <h1>Eucleia</h1> 
-          <p>0.1</p>
+          <p>0.2</p>
         </div>
         
         <h2>Login</h2>
